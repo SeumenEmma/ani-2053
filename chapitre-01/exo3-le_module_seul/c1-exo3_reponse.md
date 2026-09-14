@@ -44,4 +44,12 @@ NKMath
 |         
 |_____NkMemory
 ```
+## Arbre de dependances 
 
+```
+                         NKMath
+                    /      |      |      \
+                   /       |      |       \
+                  ↓        ↓      ↓        ↓
+          NKContainers   NKCore  NKMemory  NKPlatform
+```
