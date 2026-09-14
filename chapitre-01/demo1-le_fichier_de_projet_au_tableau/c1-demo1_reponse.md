@@ -1,9 +1,19 @@
 ## Presnetation d un fichier 
 
+### Introduction
+Bonjour je vais vous presenter le fichier NKContainers.jenga 
+
 Pour cette presentation j ai choisi le fichier 
 ```
 NKContainers.jenga 
 ```
+Dans ce fichier on trouve :
+- ce que le projet declare
+- les fichiers qu il utilise
+- Les dependances 
+
+Je vais vous presenter ce que NKContainers.jenga declare, ce qu il filtre et ce qu il delegue 
+
 
 Pour le commencement du fichier 
 ```
@@ -115,6 +125,16 @@ Il est determinee par :
 ```
 with project("NKContainers"):
 ```
+## Ce que NKContainers declare
+
+Il declare :
+- Le projet NKContainers
+- le languages c++
+- l emplacement
+- les dependances
+- les diffferents fichiers sources
+- les configurations 
+
 ## Les filtres
 
 Les filtres selon le systeme il y as :
@@ -127,5 +147,15 @@ Les filtres selon le systeme il y as :
 - Web
 - Xbox 
 - Les deux configurations 
+
+## Ce qu il delegue 
+
+Il ne compile pas de lui meme les fichiers .cpp
+il laisse jenga organiser la construction 
+jenga utilise les toolchains pars exemples
+```
+clang-native
+android-ndk
+```
 
 
