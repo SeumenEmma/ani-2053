@@ -4,14 +4,7 @@ Date : 14/09/2026
 
 ## Ce que fait NKRef
 
-Quand je tapais la commande NKRef etais cence s ouvrir et utilise pendant 10 min m ais on arrive pas a trouver NKRef les listes des fonctionnalites que j ai pu lire dans LISEZMOI-TESTEURS sont :
-- Glisser-deposer d image 
-- collage avec ctrl+v
-- zoom a la molette 
-- deplacement de la planche 
-- deplacement et redimensionnement des images 
-- la rotation 
-- La suppression
+Quand je tapais la commande NKRef etais cence s ouvrir et utilise pendant 10 min m ais on arrive pas a trouver NKRef. Ca affiche les erreurs
 
 ```
 
@@ -295,4 +288,5 @@ Status:         ✗ FAILURE
 Echecs (1) — a corriger :
   ✗ NkRef
 ```
+
 
