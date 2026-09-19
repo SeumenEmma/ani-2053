@@ -56,4 +56,4 @@ nothing to commit, working tree clean
 
 #### Signification 
 
-Ce resultat veut dire que la modification a ete enregistre dans un commit et qu il n y a plus de modification en attente et elle a ete enregistre dans l historique git.
+Ce resultat veut dire que la modification a ete enregistre dans un commit et qu il n y a plus de modification en attente et elle a ete enregistre dans l historique git 

@@ -1,5 +1,19 @@
-## Creation d un depot vide
-Apres la creation de mon depot j ai cree trois fichiers :
+## Creation d un depot vide 
+j ai cree mon depot vide avec la commande 
+```
+Mkdir TestGit 
+```
+j ai tape 
+```
+cd TestGit 
+```
+pour etre dans le dossier d essai ensuite j ai fait :
+```
+git init 
+```
+pour pouvoir initialiser le dossier et le transforme en dopot github.
+
+Et j ai ensuite cree trois fichiers :
 - fichier1.txt
 - fichier2.txt
 - fichier3.txt
