@@ -1,23 +1,30 @@
-## Mesurer la place du depot 
+## Mesurer la place du depot
 
-Pour commencer j ai ouvert mon dossier TestGit ensuite j ai tape 
+Pour commencer j'ai ouvert mon dossier TestGit ensuite j'ai tape :
+
 ```
 git status
 ```
 ce qui me donne :
 ```
-On branch master
+On branch test-taille
+Your branch is ahead of 'origin/test-taille' by 1 commit.
+  (use "git push" to publish your local commits)
+
 nothing to commit, working tree clean
 ```
-J ai mesure d abord la taille avant les 3 commits. J ai utilise la commande :
+Cela signifie que je suis actuellement sur la branche test-taille et que mon espace de travail est propre.
+Ensuite j'ai mesure la taille du dossier .git avant de faire les trois commits.
+J'ai utilise la commande :
 ```
-"{0:N2} Mo" -f ((Get-ChildItem .git -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB)
+"{0:N4} Ko" -f ((Get-ChildItem .git -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1KB)
 ```
-pour que ca me donne la taille en Mega octec
-
-La taille est : 0.04 Mo
-
-Ensuite j ai tape :
+Le resultat obtenu est :
+```
+33,7627 Ko
+```
+## Creation de la branche
+J'ai ensuite cree une nouvelle branche avec :
 ```
 git switch -c test-taille
 ```
@@ -25,26 +32,26 @@ ce qui me donne :
 ```
 Switched to a new branch 'test-taille'
 ```
-Ensuite 
+Ensuite j'ai verifie les branches avec :
 ```
 git branch
 ```
-ce qui me donne 
+ce qui me donne :
 ```
 * test-taille
   master
 ```
-ce qui signifie que je suis actuellement sur la branche test-taille.
+"*" L'etoile indique que je suis actuellement sur la branche test-taille.
 
-### Premier commit 
+## Premier commit
 
-J ai modifie fichier1.txt et puis j ai tape :
+J'ai modifie fichier1.txt puis j'ai tape :
 ```
 git status
 ```
-ce qui me montre que j ai mofifie le fichier.txt
+ce qui me montre que le fichier a ete modifie.
 
-Ensuite je tape :
+Ensuite j'ai tape :
 ```
 git add fichier1.txt
 ```
@@ -52,16 +59,16 @@ puis
 ```
 git commit -m "Premier commit de test"
 ```
+Le premier commit a donc ete cree sur la branche test-taille.
 
-### Deuxieme commit 
+## Deuxieme commit
 
-J ai modifie encore le fichier1.txt et puis j ai tape :
+J'ai modifie encore une fois fichier1.txt puis j'ai tape :
 ```
 git status
 ```
-ce qui me montre que j ai mofifie le fichier.txt
-
-Ensuite je tape :
+ce qui me montre que le fichier a ete modifie.
+Ensuite j'ai tape :
 ```
 git add fichier1.txt
 ```
@@ -69,49 +76,78 @@ puis
 ```
 git commit -m "Deuxieme commit de test"
 ```
-
-### Troisieme commit 
-
-J ai modifie encore une fois le fichier1.txt et puis j ai tape :
+## Troisieme commit
+J'ai modifie encore une fois fichier1.txt puis j'ai tape :
 ```
 git status
 ```
-ce qui me montre que j ai mofifie le fichier.txt
-
-Ensuite je tape :
+Ensuite j'ai tape :
 ```
 git add fichier1.txt
 ```
-puis 
+puis :
 ```
 git commit -m "troisieme commit de test"
 ```
-Pour verifier le graphe de l historique des commits j ai tape 
+## Historique des commits 
+Pour verifier l'historique des trois commits, j'ai tape :
 ```
-git log --oneline --graph -3
+git log --oneline
 ```
 ce qui me donne :
 ```
-* 3e9acc6 (HEAD -> test-taille) troisieme commit de test
-* 9aba202 Deuxieme  commit de test
-* df3a596 Premier commit de test
+3e9acc6 (HEAD -> test-taille) troisieme commit de test
+9aba202 Deuxieme  commit de test
+df3a596 Premier commit de test
 ```
-### Mesurer la taille final 
+## Taille du fichier de branche 
+J'ai commence par afficher les branches presentes dans .git avec :
+```
+Get-ChildItem .git\refs\heads
+```
+ce qui me donne notamment :
+```
+ Get-ChildItem .git\refs\heads
 
-pour avoir la taille apres les trois commits j utilise la commande :
-```
-"{0:N2} Mo" -f ((Get-ChildItem .git -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB)
-```
-ce qui me donne 
-taille = 0.05
+    Répertoire : C:\Users\emmas\One
+Drive\Desktop\TestGit-\.git\refs\he
+ads
 
-### Calcul de la place gagnee
-
-pour trouver la place supplementaire occupee par les commits on calcule :
+Mode                 LastWriteTime
+----                 -------------
+-a---          2026-09-17    17:15
 ```
-Taille après − Taille avant = espace supplémentaire utilisé
+Ensuite j'ai mesure la taille du fichier qui contient la reference de la branche avec :
 ```
-donc la taille supplementaire est 
+Get-Item .git\refs\heads\test-taille | Select-Object Name, Length
+```
+Le resultat est :
+```
+Name        Length
+----        ------
+test-taille     41
+```
+Le fichier test-taille fait donc 41 octets.
 
-taille = 0.01 Mo 
-donc les trois commits ont ajoutes environ 0.01 Mo de stockage Git.  
+J'ai ensuite affiche son contenu avec :
+```
+Get-Content .git\refs\heads\test-taille
+```
+ce qui me donne :
+```
+b6f09c8ac374fc55527fc2204e433a554bc12fbd
+```
+il s agit du commit ou la branche pointe actuellement
+
+## Conclusion
+
+J'ai donc cree une branche test-taille et effectue trois commits sur cette branche.
+
+La mesure en Ko donne :
+```
+33,7627 Ko
+```
+La branche test-taille elle-meme ne fait que :
+```
+41 octets
+```
