@@ -59,6 +59,12 @@ puis
 ```
 git commit -m "Premier commit de test"
 ```
+ce qui me donne :
+```
+[test-taille df3a596] Premier commit de test
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 
+```
 Le premier commit a donc ete cree sur la branche test-taille.
 
 ## Deuxieme commit
@@ -76,6 +82,12 @@ puis
 ```
 git commit -m "Deuxieme commit de test"
 ```
+ce qui me donne :
+```
+[test-taille 9aba202] Deuxieme  commit de test
+ 1 file changed, 1 insertion(+)
+```
+
 ## Troisieme commit
 J'ai modifie encore une fois fichier1.txt puis j'ai tape :
 ```
@@ -88,6 +100,11 @@ git add fichier1.txt
 puis :
 ```
 git commit -m "troisieme commit de test"
+```
+ce qui me donne :
+```
+[test-taille 3e9acc6] troisieme commit de test
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 ```
 ## Historique des commits 
 Pour verifier l'historique des trois commits, j'ai tape :
@@ -139,15 +156,26 @@ b6f09c8ac374fc55527fc2204e433a554bc12fbd
 ```
 il s agit du commit ou la branche pointe actuellement
 
+ensuite j'ai mesure la taille du depot avec 
+```
+(Get-ChildItem .git -Recurse -File | Measure-Object -Property Length -Sum).Sum
+``` 
+apres les commits et j'ai obtenu 35,9537.
+
+## difference 
+La difference entre les deux mesures est :
+35,9537 - 33,7627 Ko = 2,191 ko 
+
 ## Conclusion
 
 J'ai donc cree une branche test-taille et effectue trois commits sur cette branche.
 
-La mesure en Ko donne :
+La difference des deux mesures donne :
 ```
-33,7627 Ko
+2,191 ko 
 ```
 La branche test-taille elle-meme ne fait que :
 ```
 41 octets
 ```
+la branche est une simple référence vers un commit, alors que les nouveaux commits et les objets nécessaires à leur stockage font augmenter la taille de .git.
