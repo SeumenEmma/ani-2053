@@ -42,13 +42,13 @@ Avant de créer le fichier de 10 Mo, j'ai mesuré la taille du dossier .git avec
 
 ```
 $tailleGit = (Get-ChildItem .git -Recurse -File | Measure-Object -Property Length -Sum).Sum
-"{0:N0} octets = {1:N2} Ko = {2:N2} Mo" -f $tailleGit, ($tailleGit/1KB), ($tailleGit/1MB)
+>> "{0:N0} octets = {1:N2} Ko = {2:N2} Mo" -f $tailleGit, ($tailleGit/1KB), ($tailleGit/1MB)
 ```
 Et ca me donne comme resulat :
 ```
-52 955 octets = 51,71 Ko = 0,05 Mo
+99 544 octets = 97,21 Ko = 0,09 Mo
 ```
-La taille initiale de .git est donc = 0,05 Mo
+La taille initiale de .git est donc = 0,09 Mo
 
 ## Création du fichier de 10 Mo
 
@@ -56,7 +56,6 @@ J'ai créé un fichier-10Mo.bin d'une taille de 10 MiB avec la commande :
 
 ```
 $bytes = New-Object byte[] (10 * 1024 * 1024)
-[IO.File]::WriteAllBytes(".\fichier-10Mo.bin", $bytes)
 ```
 J'ai ensuite vérifié la taille du fichier avec :
 
@@ -68,7 +67,7 @@ ce qui me donne :
 ```
 Name               Length
 ----               ------
-fichier-10Mo.bin   10485760
+fichier-10Mo.bin 10485760
 ```
 Le fichier possède donc :
 
@@ -111,7 +110,6 @@ Changes to be committed:
   (use "git restore --staged <file>..." to unstage)
         new file:   fichier-10Mo.bin
 ```
-
 Le fichier était donc prêt à être enregistré dans un commit.
 
 ## Premier commit 
@@ -136,17 +134,17 @@ Après avoir fait le premier commit le fichier de 10 Mo, j'ai mesuré à nouveau
 
 ```
 $tailleGit = (Get-ChildItem .git -Recurse -File | Measure-Object -Property Length -Sum).Sum
-"{0:N0} octets = {1:N2} Ko = {2:N2} Mo" -f $tailleGit, ($tailleGit/1KB), ($tailleGit/1MB)
+>> "{0:N0} octets = {1:N2} Ko = {2:N2} Mo" -f $tailleGit, ($tailleGit/1KB), ($tailleGit/1MB)
 ```
 ce qui me donne :
 
 ```
-99 034 octets = 96,71 Ko = 0,09 Mo
+10 589 278 octets = 10 341,09 Ko = 10,10 Mo
 ```
 La taille de .git est donc quitter de :
 ```
-Avant : 52 955 octets
-Après : 99 034 octets
+Avant : 99 544 octets
+Après : 10 589 278 octets
 ```
 
 ## Suppression du fichier
@@ -204,9 +202,9 @@ $tailleGit = (Get-ChildItem .git -Recurse -File | Measure-Object -Property Lengt
 
 apres avoir taper la commande .git ne change pas de mesure ca mesure final est :
 ```
-99 544 octets = 97,21 Ko = 0,09 Mo
+10 589 788 octets = 10 341,59 Ko = 10,10 Mo
 ```
-soit 0,09 Mo
+soit 10,10 Mo
 
 ### Conclusion 
 Supprimer un fichier ne signifie pas supprimer son historique. C'est pourquoi les fichiers volumineux peuvent continuer à occuper de l'espace dans .git même après leur suppression du projet. Cet exercice permet également de comprendre pourquoi il faut éviter de commiter accidentellement de gros fichiers dans un dépôt Git.
