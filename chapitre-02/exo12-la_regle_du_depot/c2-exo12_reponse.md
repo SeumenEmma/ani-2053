@@ -1,135 +1,67 @@
 # Règles Git du projet
 
-Le projet est réalisé par un groupe de quatre étudiants. Pour éviter les conflits, les pertes de travail et les erreurs sur le projet, les règles suivantes doivent être respectées par tous les membres du groupe.
+## Organisation et nommage des branches
 
-# Organisation des branches
-
-La branche 
+La branche principale du projet est 
 ```
 main
 ```
-contient la version stable du projet. Aucun étudiant ne doit travailler directement dessus Chaque étudiant doit travailler sur une branche correspondant à la tâche qu'il réalise.Les noms des branches doivent respecter cette forme :
-```
-feature/nom-fonctionnalite
-fix/nom-du-bug
-docs/nom-documentation
-test/nom-du-test
-```
+Elle doit toujours contenir une version fonctionnelle et vérifiable du projet. Chaque étudiant travaille sur sa propre branche et ne modifie pas directement main. Les branches sont nommées selon le modèle :
 
-Avant de commencer une nouvelle tâche, il faut récupérer la dernière version de 
-```
-main
-``` 
-et créer sa branche à partir de cette version.
+* feature/nom-de-la-fonctionnalite pour ajouter une fonctionnalité ;
+* fix/nom-du-probleme pour corriger un problème ;
+* docs/nom-du-document pour modifier uniquement la documentation.
 
-```
-git switch main
-```
-```
-git pull
-```
-```
-git switch -c feature/ma-tache
-```
+Le nom doit être court, compréhensible et lié au travail réalisé. Une branche terminée ne doit pas rester ouverte inutilement : après sa fusion et la vérification du projet, elle peut être supprimée.
 
-Il faut éviter de garder une branche trop longtemps sans la mettre à jour.
+## Règles concernant les commits
 
-* Ce qu'il faut faire
-- Utiliser une branche pour chaque fonctionnalité ou correction importante.
-- Donner aux branches des noms courts et explicites.
-- Supprimer sa branche lorsqu'elle n'est plus nécessaire, après accord du groupe.
+Un commit doit correspondre à une modification précise et cohérente. Nous évitons de mélanger plusieurs travaux différents dans le même commit. Le message du commit doit permettre de comprendre rapidement ce qui a été réalisé. Nous utilisons un préfixe simple :
 
-# Contenu d'un commit
+* feat: pour une nouvelle fonctionnalité ;
+* fix: pour une correction ;
+* docs: pour la documentation ;
+* refactor: pour une réorganisation du code sans changement de fonctionnalité.
 
-Un commit doit correspondre à une modification précise et cohérente.
-
-Avant de faire un commit, il faut vérifier les modifications avec :
-
+Exemple :
 ```
-git status
+feat: ajout du système de sauvegarde`
 ```
-```
-git diff
-```
-Le message du commit doit expliquer clairement ce qui a été fait.
+Avant de créer un commit, l'étudiant vérifie les fichiers modifiés afin de ne pas enregistrer accidentellement des fichiers temporaires, des fichiers personnels ou des modifications qui ne concernent pas son travail. Un commit doit être suffisamment petit pour pouvoir être compris et, si nécessaire, annulé facilement.
 
-Exemples :
+## Relecture du travail
 
-```
-Ajout du menu principal
-Correction du calcul des scores
-Ajout des tests
-Mise à jour de la documentation
-```
+Aucun étudiant ne valide seul une modification destinée à main.
+Lorsqu'un étudiant termine son travail, il demande une relecture à un autre membre du groupe. Le relecteur vérifie notamment :
 
-Il faut éviter les messages comme :
-
-```
-modif
-test
-aaa
-changement
-final
-```
-
-Il ne faut pas mettre dans un commit des fichiers inutiles, des fichiers temporaires, des mots de passe ou des informations confidentielles, faire des commits réguliers, utiliser des messages précis.
-
-# Relecture du travail
-
-Avant de fusionner une modification importante dans 
-```
-main
-```
-elle doit être relue par un autre étudiant.
-
-Les quatre étudiants doivent faire les relectures à tour de rôle afin que chacun puisse vérifier le travail des autres.
-
-Le relecteur doit vérifier :
-
-* que la modification correspond à la tâche demandée ;
-* que le projet fonctionne correctement ;
-* que les tests nécessaires fonctionnent ;
+* que la modification correspond à ce qui était demandé ;
+* que le projet fonctionne après la modification ;
 * qu'aucun fichier inutile n'a été ajouté ;
-* que la modification ne casse pas une autre partie du projet.
+* que le travail ne crée pas volontairement de conflit avec celui des autres ;
+* que le changement est suffisamment clair pour être maintenu par un autre membre du groupe.
 
-Une modification ne doit donc pas être fusionnée directement sans avoir été vérifiée par un autre membre du groupe.
+Pour éviter que toujours les mêmes personnes se relisent, les relectures sont réparties entre les quatre étudiants. Si une modification est importante, deux membres peuvent la relire. L'auteur de la modification reste responsable de répondre aux remarques du relecteur et de corriger les problèmes signalés avant la fusion.
 
-# Ce qui est interdit
+## Ce qui est interdit
 
-Il est interdit de :
+Les règles suivantes s'appliquent à tous les membres du groupe :
 
-* travailler directement sur main ;
-* pousser directement sur main sans relecture ;
-* utiliser git push --force sur main ;
-* supprimer le travail d'un autre étudiant sans son accord ;
-* modifier le travail d'un camarade sans le prévenir ;
-* fusionner du code qui n'a pas été testé ;
-* ajouter des mots de passe ou des informations confidentielles dans Git ;
-* utiliser une commande Git dont on ne comprend pas les conséquences sur le dépôt commun.
+* Il est interdit de travailler directement sur main.
+* Il est interdit de fusionner son propre travail sans relecture.
+* Il est interdit de supprimer ou modifier le travail d'un autre étudiant sans en discuter avec lui.
+* Il est interdit d'ajouter des mots de passe, clés privées, fichiers personnels ou informations confidentielles dans le dépôt.
+* Il est interdit de modifier l'historique partagé de main avec des opérations destructives.
+* Il est interdit de créer volontairement des commits inutiles uniquement pour augmenter le nombre de commits.
+* Il est interdit de déclarer une tâche terminée sans avoir vérifié que le projet fonctionne.
+* Il est interdit de conserver dans le dépôt des fichiers générés automatiquement lorsqu'ils ne sont pas nécessaires au projet.
 
-# Si quelqu'un casse la branche principale
+En cas de désaccord entre deux étudiants, la modification est mise en pause et le groupe décide ensemble de la solution avant de continuer.
 
-Si une modification casse main, il ne faut pas essayer de supprimer rapidement le commit ou de cacher l'erreur.
+## Que faire si quelqu'un casse main ?
 
-La personne qui remarque le problème doit prévenir les autres étudiants.
+Si une modification provoque un problème sur main, la priorité est de remettre le projet dans un état fonctionnel. La personne qui constate le problème prévient immédiatement les autres membres du groupe. On identifie ensuite la dernière modification introduite et on vérifie si elle est réellement responsable du problème. Si nécessaire, la modification problématique est annulée avec une procédure Git adaptée, sans supprimer l'historique du projet. Une fois main rétablie, le groupe teste le projet pour confirmer que la branche fonctionne de nouveau.
+La modification pourra ensuite être retravaillée sur une branche séparée, testée à nouveau et relue avant d'être proposée pour une nouvelle fusion.
 
-Le groupe vérifie ensuite l'état du dépôt et l'historique :
+## Règle commune
 
-```
-git status
-git log --oneline
-```
-
-La correction doit être faite sur une branche séparée, par exemple :
-
-```
-fix/correction-main
-```
-
-La correction doit ensuite être testée et relue par un autre étudiant avant d'être fusionnée dans main.
-
-Il ne faut pas utiliser git push --force pour essayer de faire disparaître le problème ni supprimer l'historique du projet.
-
-# Règle générale du groupe
-
-Les quatre étudiants doivent respecter les mêmes règles. Chaque étudiant travaille sur sa propre branche, fait des commits clairs, vérifie son travail et demande une relecture avant la fusion. En cas de problème, il faut prévenir rapidement le groupe et corriger le problème sans supprimer l'historique.Le but est de garder main stable et de permettre aux quatre étudiants de travailler ensemble sans perdre le travail de quelqu'un.
+Ces règles s'appliquent aux quatre membres de manière identique. Le but est de garder un historique compréhensible, de protéger le travail de chacun et de permettre à un étudiant de reprendre le travail d'un autre sans avoir besoin de lui demander toutes les explications. Toute modification destinée au projet doit donc passer par une branche de travail, être vérifiée et relue avant d'arriver dans main.
