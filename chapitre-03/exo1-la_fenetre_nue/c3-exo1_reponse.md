@@ -161,4 +161,74 @@ jenga run
      C:\Users\emmas\OneDrive\Documents\Exercice_1\Build\Bin\Debug-Windows\Exercice1_chap3\Exercice1_chap3.exe
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
-qui me donne ca et ouvre ma fenetre. 
+qui me donne ca et ouvre ma fenetre.
+
+## Comparaison 
+
+Mon programme permet d'ouvrir une fenêtre, de la garder ouverte et de terminer proprement le programme.
+
+Le code de mon main.cpp est le suivant :
+```
+#include "NKWindow/NKWindow.h"
+#include "NKWindow/NKMain.h"
+#include "NKLogger/NkSink.h"
+#include "NKTime/NkTime.h"
+#include "NKTime/NkChrono.h"
+
+#include "NKEvent/NkWindowEvent.h"
+#include "NKEvent/NkKeyboardEvent.h"
+
+using namespace nkentseu;
+
+int nkmain(const NkEntryState &state) {
+    NkWindowConfig cfg;
+    cfg.title  = "Ma fenetre";
+    cfg.width  = 1280;
+    cfg.height = 720;
+
+    NkWindow window(cfg);
+    if (!window.IsOpen()) {
+        logger.Error("[app] creation fenetre echouee");
+        return -1;
+    }
+    while (window.IsOpen()) { /* les evenements arrivent ici */ }
+    return 0;
+}
+```
+Le programme du chapitre est plus petit que mon programme.
+
+Dans mon programme, les éléments suivants sont ajoutés par rapport au chapitre :
+
+#include "NKLogger/NkSink.h"
+#include "NKTime/NkTime.h"
+#include "NKTime/NkChrono.h"
+#include "NKEvent/NkWindowEvent.h"
+#include "NKEvent/NkKeyboardEvent.h"
+
+J'ai également ajouté :
+
+using namespace nkentseu;
+
+En revanche, la partie principale du programme est la même que dans le chapitre :
+
+int nkmain(const NkEntryState &state) {
+    NkWindowConfig cfg;
+    cfg.title  = "Ma fenetre";
+    cfg.width  = 1280;
+    cfg.height = 720;
+
+    NkWindow window(cfg);
+    if (!window.IsOpen()) {
+        logger.Error("[app] creation fenetre echouee");
+        return -1;
+    }
+    while (window.IsOpen()) { /* les evenements arrivent ici */ }
+    return 0;
+}
+
+Mon code main.cpp : 25 lignes 
+Le code main.cpp du chapitre : 17 lignes 
+
+## Conclusion
+
+Les instructions principales nécessaires à l'ouverture, au maintien et à la fermeture propre de la fenêtre sont présentes dans le programme du chapitre. Mon programme reprend cette structure en y ajoutant des éléments supplémentaires liés aux fonctionnalités utilisées dans mon projet.
