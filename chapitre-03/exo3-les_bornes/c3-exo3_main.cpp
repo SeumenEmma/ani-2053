@@ -1,7 +1,6 @@
 #include "NKWindow/NKWindow.h"
 #include "NKWindow/NKMain.h"
-#include "NKEvent/NkWindowEvent.h"
-#include "NKEvent/NkKeyboardEvent.h"
+
 
 using namespace nkentseu;
 

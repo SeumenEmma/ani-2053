@@ -1,11 +1,6 @@
 #include "NKWindow/NKWindow.h"
 #include "NKWindow/NKMain.h"
-#include "NKLogger/NkSink.h"
-#include "NKTime/NkTime.h"
-#include "NKTime/NkChrono.h"
 
-#include "NKEvent/NkWindowEvent.h"
-#include "NKEvent/NkKeyboardEvent.h"
 
 using namespace nkentseu;
 
