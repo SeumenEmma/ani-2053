@@ -7,9 +7,9 @@ using namespace nkentseu;
 int nkmain(const NkEntryState &state) {
     NkWindowConfig cfg;
     cfg.title  = "Ma fenetre";
-    cfg.minHeight = 60;
-    cfg.minWidth = 60;
-
+    cfg.width  = 1280;
+    cfg.height = 720;
+    
     cfg.resizable = true;
     cfg.movable = true;
     cfg.closable =  true;
@@ -27,6 +27,14 @@ int nkmain(const NkEntryState &state) {
         while(NkEvent* e = NkEvents().PollEvent()) {
             if (e->Is<NkWindowCloseEvent>()) {
                 window.Close();
+            }
+            if (e->Is<NkWindowResizeEvent>()) {
+                auto size = window.GetSize();
+                logger.Info(
+                    "Taille de la fenetre : {} x {}",
+                    size.x,
+                    size.y
+                );
             }
         }
     }
