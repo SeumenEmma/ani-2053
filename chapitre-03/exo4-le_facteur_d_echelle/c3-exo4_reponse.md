@@ -11,8 +11,8 @@ Le but est ensuite d'observer les valeurs obtenues sur mon système.
 
 J'ai créé une fenêtre avec une taille initiale de :
 
-- largeur : 1280 pixels ;
-- hauteur : 720 pixels.
+- largeur : 1280 pixels
+- hauteur : 720 pixels
 
 La fenêtre est également configurée pour être redimensionnable.
 
@@ -140,11 +140,7 @@ Les valeurs observées sont donc :
 
 ## 6. Observation
 
-La taille de la fenêtre et celle de la cible de rendu sont identiques lors de mon test.
-
-Le programme affiche également une valeur de `1278` pour le facteur d'échelle.
-
-Ce résultat correspond à la valeur affichée par le programme lors de l'exécution sur mon système.
+La taille de la fenêtre et celle de la cible de rendu sont identiques lors de mon test. Le programme affiche également une valeur de `1278` pour le facteur d'échelle. Ce résultat correspond à la valeur affichée par le programme lors de l'exécution sur mon système. Meme comme le facteur d echelle est sence affiche un 1.quelque chose.
 
 ## 7. Conclusion
 
@@ -163,4 +159,3 @@ window.GetDpiScale()
 ```
 
 J'ai ensuite affiché ces trois informations côte à côte dans la console afin de pouvoir comparer la taille de la fenêtre, la taille de la cible de rendu et le facteur d'échelle.
-
