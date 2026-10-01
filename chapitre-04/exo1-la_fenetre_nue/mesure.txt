@@ -1,0 +1,1 @@
+lignes : 22, lignes utiles : 20, background : 150, 0, 200
