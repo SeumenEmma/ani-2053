@@ -1,0 +1,32 @@
+Ce que la coquille me donne :
+
+La coquille avec NkCanvasApp me donne une structure 
+déjà préparée pour créer une application graphique. 
+Elle s'occupe notamment de la création de la fenêtre,
+de la boucle principale et de l'organisation entre 
+la mise à jour avec OnUpdate et le rendu avec OnRen
+der. Cela permet d'écrire moins de code et de me con
+centrer principalement sur le comportement et le des
+sin de mon application.
+
+Ce qu'elle me prend :
+
+La coquille me laisse moins de contrôle sur le fonc
+tionnement interne de la boucle principale. Je ne 
+gère pas directement l'ordre des opérations comme 
+la récupération du temps, le traitement des événements,
+le Clear et le Display. Pour une application qui néces
+site un fonctionnement très particulier de la boucle 
+ou une gestion plus précise des ressources, cette 
+abstraction peut donc être une contrainte.
+
+Quand je choisirais la main :
+
+Je choisirais la programmation à la main lorsque 
+j'ai besoin d'un contrôle précis sur la boucle princi
+pale, notamment sur l'ordre et le moment où les évén
+ements, la mise à jour et le rendu sont exécutés. 
+Pour une application graphique simple, je choisirais
+plutôt la coquille parce qu'elle réduit la quantité 
+de code à écrire et rend la structure du programme 
+plus simple.
