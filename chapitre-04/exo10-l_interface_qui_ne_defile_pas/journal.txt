@@ -1,0 +1,11 @@
+VERSION AVEC ResetView()
+
+reset : oui, centre_x : 600, barre_x : 0
+reset : oui, centre_x : 800, barre_x : 0
+reset : oui, centre_x : 1000, barre_x : 0
+
+VERSION SANS ResetView()
+
+reset : non, centre_x : 600, barre_x : -200
+reset : non, centre_x : 800, barre_x : -400
+reset : non, centre_x : 1000, barre_x : -600

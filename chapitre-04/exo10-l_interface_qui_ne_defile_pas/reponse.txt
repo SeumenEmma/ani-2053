@@ -1,0 +1,18 @@
+Ce que fait la barre sans ResetView :
+Sans ResetView(), la barre d'interface n'est plus 
+fixe à l'écran. Elle utilise la même vue que le mon
+de qui défile. Quand le centre de la vue se déplace, 
+la barre se déplace donc elle aussi avec le monde.
+
+Pourquoi :
+La vue est un état du rendu. Après avoir appelé Set
+View(vue), tous les éléments dessinés utilisent cette
+vue tant qu'elle n'est pas modifiée. Le monde et la
+barre utilisent donc le même déplacement si on ne 
+remet pas la vue par défaut.
+
+Ou placer l'appel :
+Il faut placer ResetView() après avoir dessiné le mon
+de et avant de dessiner la barre d'interface. Ainsi,
+le monde utilise la vue qui défile, puis l'interface 
+utilise la vue normale et reste fixe à l'écran.
