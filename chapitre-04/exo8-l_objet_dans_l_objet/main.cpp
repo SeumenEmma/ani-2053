@@ -17,6 +17,7 @@ struct Objet
     int echelleMonde;
     int niveau;
 };
+
 int trouverParent(Objet objets[], int nombre, const std::string &nom)
 {
     for (int i = 0; i < nombre; ++i)
@@ -28,6 +29,18 @@ int trouverParent(Objet objets[], int nombre, const std::string &nom)
     }
 
     return -1;
+}
+
+int normaliserAngle(int angle)
+{
+    angle %= 360;
+
+    if (angle < 0)
+    {
+        angle += 360;
+    }
+
+    return angle;
 }
 
 int main()
@@ -45,17 +58,19 @@ int main()
                  >> objets[i].ty
                  >> objets[i].angle
                  >> objets[i].echelle;
+
         if (objets[i].parent == "-")
         {
             objets[i].x = objets[i].tx;
             objets[i].y = objets[i].ty;
-            objets[i].angleMonde = objets[i].angle;
+            objets[i].angleMonde = normaliserAngle(objets[i].angle);
             objets[i].echelleMonde = objets[i].echelle;
             objets[i].niveau = 1;
         }
         else
         {
-            int parentIndex = trouverParent(objets, i, objets[i].parent);
+            int parentIndex =
+                trouverParent(objets, i, objets[i].parent);
 
             Objet &parent = objets[parentIndex];
 
@@ -90,29 +105,25 @@ int main()
             objets[i].y = parent.y + ry;
 
             objets[i].angleMonde =
-            (parent.angleMonde + objets[i].angle) % 360;
+                normaliserAngle(parent.angleMonde + objets[i].angle);
 
-        if (objets[i].angleMonde < 0)
-        {
-            objets[i].angleMonde += 360;
-        }
+            objets[i].echelleMonde =
+                parent.echelleMonde * objets[i].echelle;
 
-        objets[i].echelleMonde =
-            parent.echelleMonde * objets[i].echelle;
-
-        objets[i].niveau =
-            parent.niveau + 1;
+            objets[i].niveau =
+                parent.niveau + 1;
         }
     }
+
     int profondeur = 0;
 
     for (int i = 0; i < N; ++i)
     {
         std::cout << objets[i].nom << " "
-                << objets[i].x << " "
-                << objets[i].y << " "
-                << objets[i].angleMonde << " "
-                << objets[i].echelleMonde << '\n';
+                  << objets[i].x << " "
+                  << objets[i].y << " "
+                  << objets[i].angleMonde << " "
+                  << objets[i].echelleMonde << '\n';
 
         if (objets[i].niveau > profondeur)
         {
@@ -121,5 +132,6 @@ int main()
     }
 
     std::cout << "PROFONDEUR " << profondeur << '\n';
+
     return 0;
 }
