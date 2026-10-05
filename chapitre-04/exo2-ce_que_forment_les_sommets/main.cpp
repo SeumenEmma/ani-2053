@@ -5,6 +5,7 @@ int main()
 {
     int n;
     std::cin >> n;
+
     int totalPoints = 0;
     int totalSegments = 0;
     int totalTriangles = 0;
@@ -16,11 +17,11 @@ int main()
         int sommets;
 
         std::cin >> type >> sommets;
+
         if (type == "POINTS")
         {
             std::cout << type << " " << sommets << " "
-                    << sommets << " POINTS 0\n";
-
+                      << sommets << " POINTS 0\n";
             totalPoints += sommets;
         }
         else if (type == "LINES")
@@ -29,8 +30,7 @@ int main()
             int restants = sommets % 2;
 
             std::cout << type << " " << sommets << " "
-                    << segments << " SEGMENTS " << restants << "\n";
-
+                      << segments << " SEGMENTS " << restants << "\n";
             totalSegments += segments;
         }
         else if (type == "LINE_STRIP")
@@ -50,8 +50,7 @@ int main()
             }
 
             std::cout << type << " " << sommets << " "
-                    << segments << " SEGMENTS " << restants << "\n";
-
+                      << segments << " SEGMENTS " << restants << "\n";
             totalSegments += segments;
         }
         else if (type == "TRIANGLES")
@@ -60,8 +59,7 @@ int main()
             int restants = sommets % 3;
 
             std::cout << type << " " << sommets << " "
-                    << triangles << " TRIANGLES " << restants << "\n";
-
+                      << triangles << " TRIANGLES " << restants << "\n";
             totalTriangles += triangles;
         }
         else if (type == "TRIANGLE_STRIP")
@@ -81,8 +79,7 @@ int main()
             }
 
             std::cout << type << " " << sommets << " "
-                    << triangles << " TRIANGLES " << restants << "\n";
-
+                      << triangles << " TRIANGLES " << restants << "\n";
             totalTriangles += triangles;
         }
         else if (type == "TRIANGLE_FAN")
@@ -102,20 +99,20 @@ int main()
             }
 
             std::cout << type << " " << sommets << " "
-                    << triangles << " TRIANGLES " << restants << "\n";
-
+                      << triangles << " TRIANGLES " << restants << "\n";
             totalTriangles += triangles;
         }
         else
         {
             std::cout << type << " " << sommets << " REFUSE\n";
-
             totalRefuses++;
         }
-        std::cout << "POINTS " << totalPoints << "\n";
-        std::cout << "SEGMENTS " << totalSegments << "\n";
-        std::cout << "TRIANGLES " << totalTriangles << "\n";
-        std::cout << "REFUSES " << totalRefuses << "\n";
     }
+
+    std::cout << "POINTS " << totalPoints << "\n";
+    std::cout << "SEGMENTS " << totalSegments << "\n";
+    std::cout << "TRIANGLES " << totalTriangles << "\n";
+    std::cout << "REFUSES " << totalRefuses << "\n";
+
     return 0;
 }
