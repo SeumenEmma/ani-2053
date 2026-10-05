@@ -10,7 +10,7 @@ int main()
     int totalTriangles = 0;
     int totalRefuses = 0;
 
-    for (int i = 0; i < n; ++i)
+    for (int i = 0; i < n; i++)
     {
         std::string type;
         int sommets;
