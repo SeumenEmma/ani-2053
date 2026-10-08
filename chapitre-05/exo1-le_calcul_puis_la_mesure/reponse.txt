@@ -1,0 +1,32 @@
+Ce que la taille du fichier ne dit pas :
+La taille du fichier sur le disque ne permet pas de 
+connaître directement la mémoire nécessaire une fois
+l'image chargée. Par exemple, photo1.jpg ne fait que
+933652 octets sur le disque, alors que le calcul de 
+sa mémoire d'image donne 53747712 octets. La compres
+sion JPEG permet donc d'avoir un fichier beaucoup 
+plus petit que les données nécessaires en mémoire.
+
+L'ecart entre calcul et mesure :
+Le calcul correspond à la largeur multipliée par la 
+hauteur et par le nombre d'octets par pixel. La mesu
+re avec WorkingSet64 correspond à la mémoire résiden
+te totale du processus et pas uniquement aux pixels 
+de l'image. Il est donc normal qu'il y ait un écart. 
+Pour photo1.jpg, le calcul est de 53747712 octets 
+et la mesure est de 53772288 octets. Pour photo2.jpg
+le calcul est de 12502500 octets et la mesure est 
+de 12582912 octets. La mesure de capture.png est 
+particulièrement différente, avec 7770368 octets 
+calculés contre 102400 octets mesurés, ce qui montre 
+les limites de cette méthode.
+
+Avant d'ouvrir cinquante photos :
+Il faut tenir compte de la mémoire nécessaire aux 
+images une fois décompressées. Cinq fichiers peuvent
+être relativement petits sur le disque tout en occu
+pant beaucoup plus de mémoire une fois chargés. Par 
+exemple, photo1.jpg occupe 933652 octets sur le dis
+que mais environ 53747712 octets pour ses pixels. 
+Ouvrir beaucoup de grandes photos en même temps peut
+donc augmenter rapidement l'utilisation de la mémoire.
