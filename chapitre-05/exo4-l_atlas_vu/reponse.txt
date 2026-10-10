@@ -1,0 +1,24 @@
+Pourquoi une seule texture :
+
+Une seule texture permet de regrouper tous les carac
+tères d’une police dans une même image appelée atlas
+de texture. Cela évite de charger une texture diffé
+rente pour chaque caractère et réduit les changements
+de texture lors de l’affichage du texte. Le rendu est
+ainsi plus efficace.
+
+Ce que change la taille :
+
+La taille de la police détermine les dimensions des 
+caractères rasterisés. À 18, les caractères occupent 
+généralement moins d’espace qu’à 48. Une police plus 
+grande nécessite donc davantage de place dans l’atlas
+Selon le nombre de caractères et leur forme, la taille 
+de la texture peut aussi augmenter.
+
+À quoi sert la marge entre glyphes :
+
+La marge permet de séparer les caractères dans l’atlas. 
+Elle limite les débordements visuels et les mélanges 
+entre caractères voisins lorsque la texture est filtrée 
+ou lorsque le texte est affiché à différentes échelles.

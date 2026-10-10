@@ -1,0 +1,2 @@
+taille : 18, glyphes : 192, texture : 512 x 512, perdu : à calculer
+taille : 48, glyphes : à mesurer, texture : à mesurer, perdu : à calculer
