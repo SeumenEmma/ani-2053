@@ -1,0 +1,16 @@
+Constat : Le programme reste bloqué et n’affiche ja
+mais « Fin du programme », car chaque thread attend 
+un verrou détenu par l’autre.
+
+Pause : Le thread A attend le verrou m2 à la ligne 
+20, tandis que le thread B attend le verrou m1 à la 
+ligne 31. Le thread principal attend la fin du thread 
+A dans a.Join().
+
+Correction : J’ai imposé le même ordre de verrouillage 
+aux deux threads : m1 puis m2. J’ai conservé les 
+deux verrous et les pauses de 100 ms.
+
+Règle : Tous les threads doivent acquérir les verrous 
+partagés dans le même ordre afin d’éviter les inter
+blocages.
