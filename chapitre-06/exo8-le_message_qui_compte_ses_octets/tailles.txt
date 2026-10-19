@@ -1,0 +1,20 @@
+
+Types complets : 18 octets.
+
+Quantifié : 8 octets.
+
+Écart maximal :
+État : 0.
+Numéro : 0.
+Position x : 0,004 m.
+Position y : 0,003 m.
+Angle : 0,2 degré.
+Santé : 0.
+
+Ce que le joueur verrait :
+Les écarts sont très faibles. Une différence de quel
+ques millimètres sur la position et de 0,2 degré sur 
+l'angle serait généralement imperceptible dans un jeu.
+L'état, le numéro et la santé restent identiques avec
+les valeurs choisies. Le paquet quantifié occupe 10 
+octets de moins que le paquet complet.
