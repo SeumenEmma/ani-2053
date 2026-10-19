@@ -1,0 +1,27 @@
+Serveur :
+
+Serveur en attente sur le port 7777...
+Message du pair 1 : Bonjour serveur !
+
+Client :
+
+Connexion au serveur 127.0.0.1:7777
+Pair connecte : 1
+Message envoye : Bonjour serveur !
+
+Pair :
+
+L’identifiant 1 affiché côté client correspond au 
+pair distant, c’est-à-dire le serveur. Côté serveur,
+l’identifiant affiché dans le message reçu identifie
+le client. Ces identifiants sont attribués par le sys
+tème de communication.
+
+Machines :
+
+Le test a été réalisé sur une seule machine, avec le
+serveur et le client lancés dans deux terminaux dif
+férents. L’adresse 127.0.0.1 désigne la machine loca
+le. Pour communiquer entre deux machines distinctes,
+le client devra utiliser l’adresse IP locale du ser
+veur.
