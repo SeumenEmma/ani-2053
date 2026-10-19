@@ -1,0 +1,29 @@
+Liste :
+
+Serveurs trouves : 3
+Adresse : 10.10.10.10:10 | Nom : Serveur Emma
+Adresse : 10.10.10.10:10 | Nom : Serveur Emma
+Adresse : 10.10.10.10:10 | Nom : Serveur Emma
+
+Apparitions :
+
+Le serveur « Serveur Emma » apparaît 3 fois, toujours
+avec l’adresse affichée 10.10.10.10:10.
+
+Pourquoi :
+
+Le serveur appelle NkDiscovery::Broadcast(info) toutes
+les deux secondes. Le client appelle NkDiscovery::
+Listen(6000, serveurs) pendant six secondes. Il a 
+donc reçu trois annonces. Bien que la documentation 
+de NkLobby.h indique une déduplication par adresse 
+IP et port, mon test affiche trois entrées identiques : 
+ce comportement reste à vérifier dans l’implémentation 
+de NkLobby.cpp.
+
+Machines :
+
+Le test a été réalisé sur une seule machine, avec 
+le serveur et le client lancés dans deux terminaux. 
+La découverte entre deux machines distinctes n’a pas
+été testée.
