@@ -1,0 +1,23 @@
+Sans protection : Totaux obtenus : 2590142, 1964529, 
+1547167 ; temps médian : 53.0405 ms.
+
+Mutex : Total obtenu : 8000000 ; temps médian : 
+321.413 ms.
+
+Atomique : Total obtenu : 8000000 ; temps médian : 
+197.698 ms.
+
+Local : Total obtenu : 8000000 ; temps médian : 
+48.5569 ms.
+
+La moins chère : Local.
+
+Pourquoi : Sans protection, le temps est faible, mais
+des incréments sont perdus. Le mutex garantit le bon
+total, mais les fils attendent que le verrou soit 
+libéré. L’atomique garantit le bon total, mais cha
+que incrément partagé nécessite une opération atomi
+que. La version locale est la moins chère parmi les 
+versions correctes : chaque fil incrémente sa propre
+variable, puis les résultats sont additionnés après 
+les Join.
