@@ -1,0 +1,28 @@
+Dix totaux :
+1. 1 637 113
+2. 1 894 092
+3. 1 716 589
+4. 2 050 210
+5. 1 780 668
+6. 1 549 085
+7. 2 012 183
+8. 1 542 843
+9. 2 235 161
+10. 1 740 239
+
+Un seul fil :
+1 000 000
+
+Release :
+1. 1 701 855
+2. 1 693 586
+3. 2 157 007
+
+Pourquoi :
+Le total obtenu avec plusieurs fils est inférieur au 
+total attendu de 8 000 000, car plusieurs fils modi
+fient simultanément la variable compteur. Des mises 
+à jour se perdent. Avec un seul fil, le total est 
+exactement 1 000 000. Les résultats en Release varient 
+également à cause de cette concurrence et du compor
+tement du programme.
