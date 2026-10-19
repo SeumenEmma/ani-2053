@@ -1,0 +1,19 @@
+Tâche : Additionner les entiers de 1 à 1000 dans une
+variable locale, pour 200 tâches.
+
+Réserve : 0.2947 ms, 0.2488 ms, 0.1440 ms
+
+Fils : 35.1397 ms, 23.8531 ms, 14.6391 ms
+
+Ouvriers : 4
+
+Tâche longue : Réserve : 6.5387 ms, 3.9644 ms, 4.2490 ms
+Fils : 31.1522 ms, 18.9505 ms, 19.7913 ms.
+
+Pourquoi : La réserve est plus rapide car elle réuti
+lise des fils déjà créés, tandis que la création de 
+200 fils indépendants prend du temps. Lorsque la tâche
+devient 100 fois plus longue, le calcul demande plus
+de temps dans les deux versions. Le coût de création
+des fils devient moins important, mais la réserve res
+te plus rapide dans nos mesures.
