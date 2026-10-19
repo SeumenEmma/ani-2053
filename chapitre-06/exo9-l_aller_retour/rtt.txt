@@ -1,0 +1,6 @@
+Moyenne : 326.039 ms
+Minimum : 248.926 ms
+Maximum : 529.140 ms
+Lissée : 298.122 ms
+Moteur : 42.679 ms
+Écart : 54.770 ms
