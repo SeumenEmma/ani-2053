@@ -1,0 +1,42 @@
+Ce qu'il possède :
+
+`NkTransformable` possède 8 membres privés : 
+`mPosition`, `mRotation`, `mScale`, `mOrigin`, 
+`mCachedTransform`, `mCachedInverse`, `mDirty` et 
+`mInverseDirty`. Les quatre premiers représentent 
+l'état géométrique : position, rotation, échelle et 
+origine. Les quatre autres sont liés au cache des trans
+formations et à leur recalcul. Je les compte comme des
+membres déclarés, mais je les mets à part de l'état 
+géométrique principal.
+
+Qui l'appelle :
+
+Dans `include/NKCanvas/Renderer/Resources/NkSprite.h`,
+`NkSprite` et `NkText` héritent de `NkTransformable`. 
+Dans `include/NKCanvas/Renderer/Shapes/NkShape.h`, 
+`NkShape` en hérite également. Ce sont des usages con
+firmés par les déclarations de classes, contrairement 
+aux simples mentions dans les commentaires de 
+`NkDrawable.h` ou dans les commentaires des autres fichiers.
+
+Ce qu'il promet :
+
+Les noms des méthodes publiques indiquent qu'il per
+met de définir et de consulter la position, la rota
+tion, l'échelle et l'origine (`SetPosition`, 
+`SetRotation`, `SetScale`, `SetOrigin`, `GetPosition`,
+`GetRotation`, `GetScale`, `GetOrigin`). Il propose 
+aussi des changements avec `Move`, `Rotate` et 
+`Scale`, ainsi que l'accès à la transformation cal
+culée et à son inverse avec `GetTransform` et 
+`GetInverseTransform`.
+
+Ce que je n'ai pas lu :
+
+Je n'ai pas eu besoin d'ouvrir les corps des méthodes
+pour identifier les membres, les classes qui héritent
+de `NkTransformable` et les promesses suggérées par 
+les noms publics. Je n'ai pas lu les implémentations 
+des méthodes des classes utilisatrices ni les détails
+des calculs internes pour répondre aux trois questions.
