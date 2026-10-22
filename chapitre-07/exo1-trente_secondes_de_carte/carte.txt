@@ -1,0 +1,34 @@
+Module : NKNetwork
+
+D'après le projet :
+1. Le module pourrait permettre de communiquer entre 
+plusieurs ordinateurs.
+2. Il pourrait utiliser des flux pour échanger des 
+données.
+3. Il pourrait gérer plusieurs opérations simulta
+nément grâce au multithreading.
+4. Il pourrait s'appuyer sur des fonctions communes 
+du système.
+5. Il pourrait utiliser des mécanismes liés au temps
+pour gérer les échanges.
+
+Après l'en-tête :
+L'en-tête principal est `include/NKNetwork/NKNetwork.h`. 
+Il présente NKNetwork comme un module réseau organisé 
+en plusieurs couches : système, transport, protocole, 
+jeux (ECS) et application. Il expose notamment des 
+outils pour les sockets, les connexions, la réplication 
+des entités, les appels RPC, les lobbies, le matchma
+king et les requêtes HTTP. Les exemples montrent com
+ment initialiser un serveur ou un client et comment 
+connecter un client à un serveur.
+
+Mes erreurs :
+Les dépendances seules ne permettaient pas de connaître 
+les fonctionnalités précises du module. Elles donnaient 
+des indices sur les outils utilisés, mais pas sur l'orga
+nisation complète en couches. Je n'avais pas identi
+fié, avant de lire l'en-tête, les fonctions liées aux
+jeux en réseau, au matchmaking, aux lobbies et aux 
+requêtes HTTP. Mes premières idées étaient donc par
+tielles et certaines restaient à vérifier.
