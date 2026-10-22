@@ -1,0 +1,80 @@
+Les sauts :
+
+1. Fichier de mon application — fonction `OnRender
+(NkRenderWindow &target)` : l’appel `target.Clear(couleur)` 
+demande au rendu d’effacer la cible avec la couleur 
+fournie. Le code exact de mon application n’a pas 
+été inspecté ici ; je pars de l’appel indiqué dans 
+l’exercice.
+
+2. `include/NKCanvas/Renderer/Targets/NkRenderWindow.h` 
+fonction `NkRenderWindow::Clear(const NkColor2D &color)`
+: la méthode est déclarée comme une redéfinition de 
+`Clear` héritée de `NkRenderTarget`. Son implémen
+tation n’a pas été trouvée dans les fichiers source 
+consultés.
+
+3. `include/NKCanvas/Renderer/Core/NkRenderer2D.h`
+fonction `NkRenderer2D::Clear(const NkColor2D &c)` 
+: le corps de cette méthode vérifie si `mBackend` 
+existe. Si oui, elle transmet la couleur au backend 
+avec `mBackend->Clear(c)`.
+
+4. `include/NKCanvas/Renderer/Core/NkIRenderer2D.h`
+fonction virtuelle pure `NkIRenderer2D::Clear(const 
+NkColor2D &color)` : la méthode est déclarée avec 
+`= 0`. Cette déclaration impose une implémentation 
+aux classes concrètes, mais ne contient pas le code 
+qui effectue l’effacement.
+
+5. `include/NKCanvas/Backend/` classes de rendu spé
+cifiques : plusieurs fichiers déclarent une redéfini
+tion de `Clear`, notamment les backends DirectX, 
+OpenGL, Metal et Software. Le code consulté ne permet 
+pas de suivre intégralement l’exécution jusqu’à l’opé
+ration graphique concrète.
+
+Arrêt :
+
+Je m’arrête au niveau des implémentations des backends, 
+car les fichiers consultés ne donnent pas le corps 
+de toutes les méthodes concernées. La recherche de 
+`NkRenderWindow::Clear` dans les fichiers source 
+`.cpp`, `.cc` et `.cxx` n’a retourné aucun résultat. 
+Certaines implémentations peuvent se trouver dans une 
+bibliothèque compilée ou dans des sources qui ne sont 
+pas présentes dans le dossier inspecté. Le signal d’arrêt est donc une limite de visibilité 
+du code source.
+
+Pourquoi là :
+
+Je m’arrête à cet endroit parce que je dois distinguer 
+ce que le code montre réellement de ce que je pourrais 
+seulement supposer. Une déclaration indique qu’une 
+méthode existe, mais ne permet pas de connaître son 
+comportement interne. De même, `mBackend->Clear(c)` 
+montre qu’une couleur est transmise au backend lors
+que `mBackend` n’est pas nul ; cela ne prouve pas à 
+lui seul comment chaque backend efface concrètement 
+l’image.
+
+Ce que je sais maintenant :
+
+- `NkRenderWindow.h` déclare la méthode `Clear` et 
+expose une façade de rendu `mFacade`.
+- `NkRenderer2D::Clear` vérifie que `mBackend` 
+existe avant de lui transmettre la couleur.
+- `NkIRenderer2D::Clear` est une méthode virtuelle 
+pure.
+- Plusieurs backends déclarent leur propre version 
+de `Clear`, mais leurs comportements ne sont pas 
+tous visibles dans les fichiers consultés.
+- Les commentaires de `NkIGraphicsContext.h` indiquent 
+que certains backends gèrent la couleur d’effacement 
+au début d’une image (`BeginFrame`). Ce détail ne 
+doit pas être généralisé à tous les backends.
+- Je n’ai pas vérifié l’implémentation de 
+`NkRenderWindow::Clear` ni suivi l’exécution jusqu’à
+l’opération graphique finale.
+- Je distingue donc les appels et déclarations obser
+vés des comportements internes qui restent inconnus.
