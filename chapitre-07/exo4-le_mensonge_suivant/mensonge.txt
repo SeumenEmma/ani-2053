@@ -1,0 +1,42 @@
+Le commentaire :
+
+Dans le fichier `NkCanvasSplash.h`, au début du fi
+chier, le commentaire affirme :
+
+« Le nom du jeu est la SEULE variable — il n'y a pas
+d'autre réglage. »
+
+Le code :
+
+À la ligne 158, la méthode `Dessiner()` reçoit 
+plusieurs paramètres :
+- `titre` : la police du titre ;
+- `corps` : la police du texte principal ;
+- `petite` : la police du petit texte ;
+- `ecran` : les dimensions et la position de la zone de dessin ;
+- `logoTexId` et `logoCompletTexId` : les identifiants des textures des logos.
+
+La preuve :
+
+La signature de la méthode `Dessiner()` se trouve aux
+lignes 158 à 160 du fichier `include/NKCanvas/App
+/NkCanvasSplash.h`. Elle montre que le rendu dépend 
+de plusieurs paramètres en plus du nom du jeu, qui 
+est stocké dans `mNom` par la méthode `PoserJeu()`.
+
+Pour reproduire la vérification, ouvrir `NkCanvasSplash.h`
+, lire le commentaire au début du fichier, puis 
+consulter la déclaration de `Dessiner()` aux lignes 
+158 à 160.
+
+Ce qu'il dit de son auteur :
+
+L'auteur cherche à imposer une présentation commune 
+aux écrans d'ouverture des différents jeux. Cependant
+, l'expression « seule variable » est trop absolue 
+si elle est comprise comme signifiant que le nom du 
+jeu est l'unique donnée susceptible d'influencer le 
+rendu. Le commentaire aurait gagné à préciser qu'il 
+s'agit de la seule différence fonctionnelle prévue 
+entre les jeux, tandis que les paramètres techniques 
+du dessin restent nécessaires.
