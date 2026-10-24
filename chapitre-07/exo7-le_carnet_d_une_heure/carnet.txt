@@ -1,0 +1,83 @@
+Date de recherche : non notée précisément.
+Heure de début : inconnue.
+Heure de fin : inconnue.
+
+Les endroits :
+
+- Fichier `Canvas/include/NKEvent/NkPointerEvent.h` :
+  - Déclaration de `NkPointerPhase` avec les phases
+  `NK_POINTER_DOWN`, `NK_POINTER_MOVE`, `NK_POINTER_UP` 
+  et `NK_POINTER_CANCEL`.
+  - Structure `NkPointer` contenant notamment les 
+  coordonnées `x` et `y`, la phase, l’identifiant et 
+  l’indication `fromTouch`.
+  - Fonction `NkReadPointer()` qui convertit certains
+   événements bruts de souris ou de toucher en un événement de pointeur unifié.
+  - Les coordonnées sont exprimées dans le repère de
+   la zone de dessin, avec l’origine en haut à gauche.
+  - La souris utilise notamment les événements de 
+  pression, de déplacement et de relâchement du bouton gauche. Le toucher utilise les événements de début, de déplacement, de fin et d’annulation.
+
+- Fichier `Canvas/include/NKCanvas/App/NkCanvasApp.h` :
+  - Lignes 268 à 280 environ : déclaration de `OnEvent()`
+   et de `OnPointer()`.
+  - `OnEvent()` reçoit un événement brut et renvoie 
+  un booléen. Le commentaire indique que `true` si
+  gnifie que l’événement est consommé.
+  - `OnPointer()` reçoit un événement de pointeur 
+  unifié et renvoie également un booléen, avec `false` 
+  comme valeur par défaut.
+
+- Fichier `Canvas/include/NKEvent/NkEventSystem.h` :
+  - Lignes 610 et 616 : déclarations de `DispatchToCa
+  llbacks()` et `DeliverOnPumpThread()`.
+  - Les commentaires indiquent que la distribution 
+  aux mise à jour de l’état des entrées et la mise 
+  en file de l’événement font partie du traitement 
+  décrit par le système d’événements.
+
+- Fichier `Canvas/include/NKWindow/Core/NkEventSystem.h` :
+  - Ligne 479 : autre déclaration de `DispatchToCal
+  lbacks()`.
+
+- Recherches dans les fichiers du kit Canvas :
+  - Recherche de `OnPointer()` : déclaration trouvée
+   dans `NkCanvasApp.h` et exemple commenté dans `Nk
+   CanvasSplash.h`.
+  - Recherche de `DispatchToCallbacks()` et `Deliver
+  OnPumpThread()` : déclarations et commentaires 
+  trouvés, mais pas leurs définitions dans les 
+  fichiers sources recherchés.
+
+Les surprises :
+
+- Les événements de souris et de toucher peuvent être
+ représentés par une structure commune, `NkPointer`.
+- La conversion est proposée par une fonction définie
+ directement dans un fichier d’en-tête : `NkReadPointer()`.
+- Tous les événements de souris ne sont pas traités 
+comme des gestes de pointeur : le bouton gauche est 
+utilisé pour les gestes décrits par cette fonction.
+- Les événements bruts et les événements de pointeur
+ unifiés sont deux niveaux distincts de traitement.
+
+Les questions ouvertes :
+
+- Où se trouve exactement le code qui appelle `OnPointer()` ?
+- Comment le système interprète-t-il le booléen ren
+voyé par `OnPointer()` ?
+- Où sont définies les fonctions `DispatchToCallbacks()`
+ et `DeliverOnPumpThread()` ?
+- Le code d’exécution complet n’a pas été retrouvé 
+dans les fichiers sources examinés. Il faudrait con
+sulter les fichiers d’implémentation ou la documen
+tation complète du kit pour confirmer le chemin pré
+cis de distribution.
+
+Les mensonges :
+
+- Aucun mensonge démontré pendant les vérifications 
+effectuées.
+- Les points qui restent inconnus sont conservés 
+comme questions ouvertes plutôt que présentés comme 
+des faits vérifiés.
