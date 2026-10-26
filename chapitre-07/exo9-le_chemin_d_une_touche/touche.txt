@@ -1,0 +1,48 @@
+Les couches :
+
+1. Windows — `WM_KEYDOWN`
+Windows envoie ce message lorsqu’une touche est enfon
+cée. C’est le point de départ du parcours.
+
+2. NKWindow — `NkWin32WndProc`
+La fonction est présente dans `NKWindow.lib` et décla
+rée dans `include/NKWindow/Platform/Win32/NkWin32Eve
+ntSystem.h`. Elle reçoit les messages Windows.
+
+3. NKWindow — `NkWin32_ProcessMessage`
+Cette fonction est présente dans `NKWindow.lib`. Son 
+nom indique qu’elle traite les messages Windows. La 
+chaîne d’appels exacte n’a pas été vérifiée instruc
+tion par instruction.
+
+4. NKEvent — `NkKeyPressEvent` et `NkEventSystem`
+La bibliothèque contient les symboles de `NkKeyPress
+Event`, `NkEventSystem::DispatchEvent` et `NkEventSy
+stem::DispatchToCallbacks`. Ils correspondent à la 
+création et à la transmission des événements. La liai
+son exacte avec le message `WM_KEYDOWN` reste à confir
+mer.
+
+5. NKCanvas — `NkCanvasApp::OnKeyPress`
+Dans `include/NKCanvas/App/NkCanvasApp.h`, la métho
+de virtuelle `OnKeyPress(const NkKeyPressEvent &event)`
+est définie. Par défaut, elle retourne `false`. L’ap
+pel effectif depuis le système d’événements n’a pas 
+été confirmé.
+
+Où je me suis arrêté :
+
+J’ai identifié plusieurs fonctions réelles dans les 
+bibliothèques compilées et les déclarations corres
+pondantes dans les en-têtes. Cependant, les sources 
+des bibliothèques ne sont pas disponibles pour véri
+fier toute la chaîne d’appels. Les exemples trouvés 
+dans les en-têtes sont commentés et ne suffisent pas
+à prouver le parcours réel.
+
+Combien :
+
+5 couches repérées. Plusieurs fonctions intermédiaires
+sont confirmées dans les bibliothèques compilées, mais
+le parcours complet jusqu’à `NkCanvasApp::OnKeyPress`
+n’est pas entièrement vérifié.
