@@ -1,0 +1,40 @@
+Module : NKTime
+
+Après le projet : En lisant la ligne `KIT_DEPENDS` 
+de `NKCanvas.jenga`, j’ai constaté que NKTime dépend
+notamment de NKContainers, NKCore, NKLogger, NKMemory,
+NKPlatform et NKThreading. À partir du seul fichier 
+de projet, j’estime que NKTime sert à gérer le temps
+dans les programmes, probablement avec des fonctions
+de mesure de durée ou de chronométrage. Ses dépendan
+ces suggèrent qu’il s’appuie sur des services communs
+du kit, notamment la plateforme et le threading. 
+Ce n’est encore qu’une hypothèse.
+
+Après un programme : Dans le fichier `alamain.cpp`, 
+j’ai trouvé l’inclusion de `NKTime/NkClock.h` et la 
+création d’un objet `NkClock clock;`. Cela suggère 
+que le module fournit une horloge utilisable dans 
+un programme, notamment pour mesurer le temps pendant 
+une boucle d’exécution. À cette étape, je ne connais
+pas encore toutes les fonctionnalités de cette horloge.
+
+Après les en-têtes : Dans `NkClock.h`, j’ai découvert
+les méthodes `Tick()`, `GetTime()`, `Reset()`, `Pause()`,
+`Resume()` et `SetTimeScale()`. La structure `NkTime`
+expose notamment `delta`, `total`, `frameCount` et 
+`fps`. L’en-tête présente également des méthodes 
+d’attente comme `SleepMilliseconds()` et `YieldThread()`.
+NKTime sert donc à gérer et mesurer le temps, notam
+ment dans les boucles de jeu, avec le suivi des images,
+la pause, la reprise et le réglage de la vitesse du 
+temps.
+
+L’écart : La première porte m’a donné une idée générale
+du rôle de NKTime et de ses dépendances, sans révéler
+ses fonctions précises. La deuxième porte m’a montré
+son utilisation dans un programme grâce à `NkClock`,
+mais sans détailler toutes ses possibilités. La troi
+sième porte a confirmé et précisé le rôle du module 
+en présentant ses méthodes et les données temporelles
+disponibles.
