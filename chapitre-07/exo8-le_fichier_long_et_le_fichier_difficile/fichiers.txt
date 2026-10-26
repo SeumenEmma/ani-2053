@@ -1,0 +1,57 @@
+ANALYSE DE DEUX FICHIERS DU PROJET NKCANVAS
+
+1. FICHIER LONG
+
+Nom : NkGuiMonteur.h
+
+Chemin : NKGui\Doc\NkGuiMonteur.h
+
+Nombre de lignes : 5 670 lignes.
+
+Ce fichier sert à transformer un document d’interface
+graphique en widgets réels. Il organise les éléments
+de l’interface et gère leur affichage. Sa longueur 
+s’explique par le nombre de composants, les règles 
+de disposition et les différents cas à prendre en 
+compte.
+
+2. FICHIER DIFFICILE À LIRE
+
+Nom : NkFunctionSIMD.h
+
+Chemin : NKMemory\NkFunctionSIMD.h
+
+Nombre de lignes : 287 lignes.
+
+Ce fichier déclare des fonctions d’optimisation des 
+opérations mémoire grâce aux instructions SIMD. Sa 
+compréhension demande des connaissances en program
+mation C++, en manipulation des pointeurs, en aligne
+ment mémoire et en architecture des processeurs. Il 
+contient également des fonctions de copie, de dépla
+cement, de recherche et de calcul de hachage.
+
+3. INFORMATIONS CONSERVÉES PAR CES FICHIERS
+
+NkGuiMonteur.h contient les règles de construction 
+et d’affichage des éléments d’une interface graphique
+, les dispositions des composants et certaines infor
+mations nécessaires à leur rendu et NkFunctionSIMD.h
+contient les déclarations des fonctions d’optimisation
+mémoire, leurs paramètres, leurs types de retour et 
+des indications sur les contraintes d’alignement et 
+les possibilités d’optimisation.
+
+4. ENDROITS OÙ L’ÉTAT PEUT ÊTRE MODIFIÉ
+
+Dans NkGuiMonteur.h, l’état de l’interface peut être
+modifié lors de la création des widgets, de l’appli
+cation des dispositions ou du remplissage des zones 
+réservées à l’application. Le comportement dépend 
+notamment des fonctions appelées et des données du 
+document et dans NkFunctionSIMD.h, les données mémoi
+re sont modifiées lorsque les fonctions de copie, de
+déplacement ou de remplissage sont exécutées. Les 
+fonctions de recherche et de calcul de hachage trai
+tent les données fournies. Leurs effets dépendent 
+des paramètres transmis et de leur implémentation.
