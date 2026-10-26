@@ -1,0 +1,110 @@
+Par le texte :
+
+1. Méthode de recherche utilisée
+J'ai effectué une recherche dans les fichiers d'en-
+tête et les fichiers source du kit, notamment les 
+fichiers `.h` et `.cpp`, avec PowerShell et 
+`Select-String`. Le texte recherché était « target.
+Draw ». Cette commande permet de repérer les lignes 
+où cet appel est écrit explicitement sous cette for
+me.
+
+2. Ce que la recherche textuelle m'a permis de constater
+La recherche repère les occurrences qui correspondent 
+au texte demandé. Elle est utile pour retrouver rapi
+dement un appel écrit directement dans le code, sans
+ouvrir tous les fichiers un par un. Dans mon code de
+test, l'appel explicite que je veux suivre est « 
+target.Draw(objet) », situé dans `MonJeu::OnRender`.
+
+3. Limites de cette recherche
+La recherche textuelle ne montre pas forcément tous 
+les chemins qui conduisent à l'appel étudié. Elle 
+ne trouve que les lignes qui correspondent au motif 
+fourni. Par exemple, l'appel interne « drawable.Draw
+(*this, states) » ne correspond pas au texte 
+« target.Draw », car le nom de l'objet utilisé avant
+ `.Draw` est différent.
+
+4. Ce que je retiens de la recherche par texte
+Cette méthode donne des indices sur les endroits où 
+une méthode est appelée, mais elle ne suffit pas tou
+jours à reconstituer tout le chemin d'exécution. 
+Pour comprendre les appels indirects, il faut examiner
+le code autour des résultats et suivre les fonctions
+appelées. Je dois donc distinguer les occurrences 
+trouvées par la commande des relations entre fonctions 
+qui restent à vérifier.
+
+Par la pile :
+
+1. Point d'arrêt prévu
+La pile d'appels doit être examinée après l'arrêt 
+réel du programme dans le débogueur, lorsque 
+l'exécution atteint `MonObjet::Draw`. Le but est 
+d'observer les fonctions présentes dans la pile à 
+cet instant, plutôt que de déduire leur ordre 
+uniquement à partir d'une recherche dans les 
+fichiers.
+
+2. Informations à relever
+- Fonction appelante affichée par le débogueur : 
+[à relever dans la pile].
+- Fonction précédente affichée par le débogueur : 
+[à relever dans la pile].
+- Fonction suivante affichée par le débogueur : 
+[à relever dans la pile].
+
+3. Pourquoi ces informations doivent être relevées 
+pendant l'exécution
+Les noms exacts et l'ordre des fonctions doivent 
+venir de la pile réellement affichée par le débogueur.
+Ils peuvent dépendre du chemin exécuté, du point 
+d'arrêt et de la façon dont le programme a été com
+pilé. Tant que je n'ai pas arrêté le programme au 
+bon endroit et observé la pile, je ne peux pas rem
+plir ces champs de façon fiable.
+
+4. Ce que la pile doit permettre de comprendre
+Quand le point d'arrêt sera atteint dans `MonObjet::
+Draw`, la pile permettra d'observer les appels actifs
+qui ont conduit à cette fonction. Je pourrai alors 
+relever la fonction directement appelante, puis 
+examiner les fonctions situées avant et après elle 
+dans la pile affichée. Ces observations permettront 
+de compléter cette partie avec des noms exacts et 
+de comparer le chemin observé au résultat de la 
+recherche textuelle.
+
+Les différences :
+
+1. La recherche textuelle examine le code écrit
+La commande `Select-String` cherche une expression 
+précise dans les fichiers sélectionnés. Elle permet 
+de repérer les occurrences qui correspondent au texte 
+recherché, mais peut manquer les appels écrits diffé
+remment, les appels indirects ou les passages par 
+d'autres fonctions. Un résultat absent ne prouve 
+donc pas à lui seul que la fonction n'est jamais 
+appelée.
+
+2. La pile d'appels montre le chemin suivi à l'exécution
+La pile affichée par le débogueur montre les fonctions
+actives au moment où le programme s'arrête. Elle 
+permet de voir le chemin réellement suivi par cette 
+exécution jusqu'au point d'arrêt. Elle complète donc 
+la recherche textuelle, car elle donne des informations 
+sur l'exécution effective plutôt que seulement sur 
+les lignes de code qui correspondent à un motif.
+
+3. Ce que les deux méthodes apportent ensemble
+La recherche textuelle est utile pour trouver des 
+points de départ et des déclarations ou appels à 
+examiner. La pile d'appels sert ensuite à vérifier 
+quelles fonctions ont réellement conduit au point 
+d'arrêt.
+
+4. Limite actuelle de ma comparaison
+Je ne peux pas encore comparer les noms exacts de la
+pile avec les résultats de la recherche textuelle, 
+car les noms doivent être relevés dans le débogueur.
