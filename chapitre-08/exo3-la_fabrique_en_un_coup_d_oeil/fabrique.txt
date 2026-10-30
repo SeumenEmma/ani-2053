@@ -1,0 +1,30 @@
+Recherche :
+
+Commande utilisée :
+Get-ChildItem .\include -Recurse -File | Select-String 
+-SimpleMatch "NkOpenGLRenderer2D"
+
+Résultat : 5 fichiers distincts trouvés contenant 
+le nom NkOpenGLRenderer2D.
+
+Hors de son dossier :
+
+- NkIRenderer2D.h:15 — Commentaire.
+- NkRenderer2D.h:19 — Commentaire.
+- NkTextureBackend.h:22 — Commentaire.
+- NkTextureBackend.h:24 — Commentaire.
+- NkTextureBackend.h:25 — Commentaire.
+- NkTextureBackend.h:26 — Commentaire.
+- NkTextureBackend.h:27 — Commentaire.
+- NkTextureBackend.h:28 — Commentaire.
+- NkGuiDrawListRaster.h:35 — Commentaire.
+
+La classe NkOpenGLRenderer2D apparaît dans quatre 
+fichiers hors de son dossier, mais uniquement dans 
+des commentaires. Il n'y a donc aucun appel direct à
+cette classe dans ces fichiers. NkRenderer2DFactory.h
+ne nomme aucun dorsal concret : elle utilise l'inter
+face NkIRenderer2D. Cela montre que la fabrique mas
+que le choix du dorsal concret aux utilisateurs du 
+programme et respecte le principe de séparation entre 
+l'interface et les implémentations.
