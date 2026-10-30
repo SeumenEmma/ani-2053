@@ -1,0 +1,55 @@
+Situations :
+
+1. Le joueur maintient la flèche droite : PULL
+- Pourquoi : le programme doit vérifier continuelle
+ment si la touche est maintenue pour déplacer le 
+joueur.
+- Outil : `NkInput.IsKeyDown(NkKey::NK_RIGHT)`
+- Référence : `NKEvent/NkEventDispatcher.h`, lignes 
+273 et 1510.
+
+2. Le joueur appuie sur Échap : PUSH
+- Pourquoi : l'appui est un événement ponctuel qui 
+doit déclencher une action.
+- Outil : `NkKeyPressEvent`
+- Référence : `NKEvent/NkKeyboardEvent.h`, ligne 972.
+
+3. On veut connaître la position actuelle de la 
+souris : PULL
+- Pourquoi : le programme interroge la position actuel
+le lorsqu'il en a besoin.
+- Outil : `NkInput.MouseX()` et `NkInput.MouseY()`
+- Référence : `NKEvent/NkEventDispatcher.h`, lignes 
+308 et 310.
+
+4. Un fichier est déposé sur la fenêtre : PUSH
+- Pourquoi : le dépôt est une action ponctuelle qui 
+déclenche une notification.
+- Outil : `NkDropFileEvent`
+- Référence : `NKEvent/NkDropEvent.h`, ligne 373.
+
+5. La fenêtre est redimensionnée : PUSH
+- Pourquoi : le programme reçoit une notification 
+lorsqu'un redimensionnement se produit.
+- Outil : `NkWindowResizeEvent`
+- Référence : `NKEvent/NkWindowEvent.h`, ligne 453.
+
+6. Le joueur effectue un double-clic : PUSH
+- Pourquoi : le double-clic est un événement ponctuel
+détecté par le système.
+- Outil : `NkMouseDoubleClickEvent`
+- Référence : `NKEvent/NkMouseEvent.h`, ligne 684.
+
+Les deux bogues :
+
+1. Mauvais choix pour le déplacement du joueur :
+Si on utilise PUSH au lieu de PULL pour détecter une
+touche maintenue, le joueur risque de se déplacer
+qu'une seule fois au lieu de continuer à avancer tant
+que la touche reste appuyée.
+
+2. Mauvais choix pour le dépôt de fichier :
+Si on utilise PULL au lieu de PUSH, le programme ris
+que de vérifier inutilement et continuellement si un
+fichier a été déposé, au lieu de réagir directement 
+à la notification de dépôt.
