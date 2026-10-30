@@ -1,0 +1,113 @@
+1. STRATÉGIE
+
+Fichier : NKLogger/NkSink.h
+Ligne : 170
+Code : virtual void Log(const NkLogMessage &message) = 0;
+
+Justification : L'interface NkISink permet à diffé
+rentes destinations de journalisation de définir 
+leur propre comportement d'écriture. Chaque implémen
+tation concrète peut ainsi appliquer sa propre stra
+tégie.
+
+
+2. FABRIQUE
+
+Fichier : NKCanvas/Renderer/Core/NkRenderer2DFactory.h
+Ligne : 36
+Code : static NkIRenderer2D *Create(NkIGraphicsContext *ctx);
+
+Justification : NkRenderer2DFactory centralise la créa
+tion des renderers. La création des objets est ainsi
+séparée de leur utilisation.
+
+
+3. FAÇADE
+
+Fichier : NKCanvas/Renderer/Core/NkRenderer2D.h
+Ligne : 88
+Code : return mBackend ? mBackend->Begin() : false;
+
+Justification : NkRenderer2D fournit une interface 
+simplifiée et délègue les opérations au backend. L'uti
+lisateur n'a pas besoin de manipuler directement les
+détails internes du backend.
+
+
+4. PATRON DE MÉTHODE
+
+Motif absent sous forme d'implémentation confirmée 
+dans le kit.
+
+Piste la plus proche : NKTime/NkElapsedTime.h, ligne 
+421, avec la fonction ExecuteWithMonitoring(). Cepen
+dant, cette fonction se trouve dans un exemple commenté 
+et ses étapes principales sont également commentées.
+Elle ne constitue donc pas une implémentation réelle
+du patron de méthode.
+
+
+5. OBSERVATEUR
+
+Fichier : NKWindow/Core/NkEventSystem.h
+Ligne : 336
+Code : void AddEventCallback(Callback &&callback, NkWindowId windowId = NK_INVALID_WINDOW_ID) {
+
+Justification : Le système permet d'enregistrer des 
+callbacks qui seront informés de l'arrivée des événe
+ments correspondants. Cela reprend le principe du 
+patron Observateur.
+
+
+6. SINGLETON
+
+Fichier : NKThreading/NkThreadPool.h
+Ligne : 225
+Code : static NkThreadPool &GetGlobal() noexcept;
+
+Justification : GetGlobal() permet d'accéder à une 
+instance globale unique du pool de threads. Le commen
+taire associé précise le fonctionnement singleton et 
+l'initialisation thread-safe.
+
+
+7. ADAPTATEUR
+
+Fichier : NKMemory/NkStlAdapter.h
+Ligne : 186
+Code : [[nodiscard]] pointer allocate(size_type n) 
+
+Justification : NkStlAdapter adapte l'allocateur NK
+Memory à l'interface attendue par les conteneurs de 
+la bibliothèque STL. Il permet ainsi de faire commu
+niquer deux interfaces différentes.
+
+
+8. COMPOSITE
+
+Fichier : NKCanvas/Renderer/Core/NkDrawable.h
+Ligne : 51
+Code : virtual void Draw(NkRenderTarget &target, const NkRenderStates &states) const = 0;
+
+Justification : NkDrawable définit une interface com
+mune de dessin utilisée notamment par NkSprite, NkText
+et NkShape. Cette hiérarchie permet de manipuler dif
+férents objets graphiques de manière uniforme. Toute
+fois, aucune structure de composition récursive avec
+gestion d'enfants n'a été confirmée.
+
+
+9. COMMANDE
+
+Fichier : NKThreading/NkFuture.h
+Ligne : 892
+Code : virtual void Execute() = 0;
+
+Justification : AsyncTask définit une interface de 
+tâche avec une opération Execute(). Le principe est 
+de représenter une opération par un objet pouvant 
+être exécuté par un gestionnaire de tâches. Le méca
+nisme SimpleWorkerPool de NKThreading/NkThread.h, 
+ligne 534 (task->Execute();), illustre cette exécu
+tion. Certaines parties de cet exemple restent toute
+fois hypothétiques.
