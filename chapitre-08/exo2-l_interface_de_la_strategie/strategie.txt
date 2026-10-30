@@ -1,0 +1,65 @@
+Virtuelles pures :
+
+Dans le fichier NkIRenderer2D.h, la classe NkIRenderer
+2D contient 30 méthodes virtuelles pures. Une métho
+de virtuelle pure se reconnaît généralement à la pré
+sence de « = 0 » dans sa déclaration. Nous avons par
+couru les déclarations de la classe et compté chaque
+méthode une seule fois. Nous avons également vérifié
+les occurrences de « = 0 » avec une recherche dans 
+le fichier, puis contrôlé manuellement les résultats
+pour éliminer les faux positifs. En effet, une occur
+rence située dans une boucle ou appartenant à une au
+tre classe ne constitue pas une méthode virtuelle 
+pure de NkIRenderer2D. La classe possède aussi 15 
+méthodes virtuelles avec une implémentation, ainsi 
+qu'un destructeur virtuel par défaut, compté séparément.
+
+Dorsaux :
+
+Le dossier NKCanvas/Backend contient six dorsaux de 
+rendu 2D : DirectX 11, DirectX 12, Metal, OpenGL, Soft
+ware et Vulkan. Ces dorsaux permettent d'utiliser dif
+férentes technologies graphiques pour réaliser le rendu
+2D. Ils partagent une même architecture grâce à la 
+classe intermédiaire NkBatchRenderer2D, qui hérite 
+de NkIRenderer2D.
+
+Ce que chacun écrit :
+
+Les six classes de rendu héritent directement de Nk
+BatchRenderer2D. NkDX11Renderer2D redéfinit 8 métho
+des et son destructeur virtuel, soit 9 déclarations 
+override. NkDX12Renderer2D redéfinit également 8 métho
+des et son destructeur, soit 9 déclarations override.
+NkMetalRenderer2D redéfinit 9 méthodes et son destruc
+teur, soit 10 déclarations override. NkOpenGLRenderer2D
+redéfinit 9 méthodes et son destructeur, soit 10 dé
+clarations override. NkSoftwareRenderer2D redéfinit 
+9 méthodes et son destructeur, soit 10 déclarations 
+override. Enfin, NkVulkanRenderer2D, dans sa version 
+principale lorsque les en-têtes Vulkan sont disponi
+bles, redéfinit 8 méthodes et son destructeur, soit 
+9 déclarations override. Une version de secours existe 
+dans le bloc #else lorsque les en-têtes Vulkan ne 
+sont pas disponibles : elle redéfinit 6 méthodes et 
+ne possède pas de destructeur redéfini. Il ne faut 
+pas compter les deux versions simultanément.
+
+Le coût :
+
+Le coût de cette architecture est réduit grâce à 
+NkBatchRenderer2D, qui centralise les fonctionnalités
+communes du rendu 2D et implémente une grande partie
+des méthodes de NkIRenderer2D. Chaque dorsal n'a donc
+pas besoin de réécrire les 30 méthodes virtuelles 
+pures de l'interface. Il redéfinit principalement 
+les méthodes nécessaires à son fonctionnement parti
+culier : initialisation, arrêt, vérification de vali
+dité, effacement et opérations spécifiques au backend,
+comme l'envoi des lots de dessin et le transfert de 
+la projection. Cette organisation facilite l'ajout 
+de nouveaux dorsaux et permet de conserver une inter
+face commune. Le coût de chaque dorsal correspond donc
+au travail spécifique qu'il doit réaliser pour commu
+niquer avec sa technologie graphique.
