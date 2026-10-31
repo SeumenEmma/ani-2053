@@ -1,0 +1,67 @@
+Le premier pont :
+
+Le premier pont se trouve dans `NKCanvas/UI/NkGuiCan
+vasBackend.h`, à partir de la ligne 26. La méthode 
+`Init()` (ligne 38) reçoit le moteur de rendu 
+`NkIRenderer2D`. Les méthodes `UploadFontGray8()` 
+et `UploadImageRGBA()` permettent de charger les 
+textures. La méthode `Submit()` (ligne 213) reçoit 
+une liste de commandes graphiques `NkGuiDrawList`, 
+ainsi que la largeur et la hauteur du framebuffer. 
+Elle parcourt les commandes et les transforme en ap
+pels de dessin avec `DrawVertices()`. Ce pont ne re
+çoit donc pas directement des fenêtres, mais une lis
+te de commandes de dessin.
+
+Le second pont :
+
+Pour dessiner la même interface dans un fichier ima
+ge, on peut créer un second backend utilisant le ren
+du logiciel `NkSoftwareRenderer2D`. Celui-ci dessine
+dans un framebuffer en mémoire au lieu de dépendre 
+uniquement d'un affichage à l'écran. Après le rendu,
+on récupère le tampon de pixels avec `GetBackBuffer()`, 
+puis on utilise `NkImage::Wrap()` pour présenter ces
+pixels comme une image. Enfin, `SavePNG()` permet 
+d'enregistrer le résultat dans un fichier PNG.
+
+Combien de méthodes :
+
+L'interface `NkIRenderer2D` définit 29 méthodes vir
+tuelles pures. Cependant, il n'est pas nécessaire de
+réécrire ces 29 méthodes si l'on hérite de `NkBatch
+Renderer2D`, car cette classe fournit déjà une gran
+de partie du fonctionnement. Les deux méthodes backend 
+principales à implémenter sont `SubmitBatches()` et 
+`UploadProjection()`. Il faut également gérer l'ini
+tialisation, l'arrêt et la validité du moteur de ren
+du.
+
+Les données :
+
+Les données nécessaires sont la liste des commandes 
+graphiques, les sommets, les indices, les textures, 
+les informations de découpage, les dimensions de l'
+image et le tampon de pixels final. Pour enregistrer
+l'image, il faut aussi connaître le format des pixels
+et le stride, c'est-à-dire le nombre d'octets occupés 
+par une ligne. Le tampon logiciel possède une largeur, 
+une hauteur et un stride égal à quatre fois la largeur. 
+Il faut respecter le format réel des pixels et la du
+rée de vie du tampon lors de l'utilisation de `NkImage
+::Wrap()`.
+
+Dans le kit :
+
+Le kit contient déjà plusieurs éléments nécessaires 
+à cette solution. `NkGuiCanvasBackend.h` fournit le 
+premier pont vers `NkIRenderer2D`. `NkBatchRenderer2D.h`
+fournit une base de rendu réutilisable. `NkSoftware
+Renderer2D.h` propose un rendu logiciel et `NkSoft
+wareContext.h` contient les framebuffers accessibles 
+avec `GetBackBuffer()`. Enfin, `NKImage/Core/NkImage.h` 
+fournit `Wrap()` à la ligne 827 et `SavePNG()` à la 
+ligne 359. Le kit possède donc les composants néces
+saires, mais pas une classe toute faite qui relie 
+directement la liste de commandes de l'interface à 
+l'enregistrement PNG.
