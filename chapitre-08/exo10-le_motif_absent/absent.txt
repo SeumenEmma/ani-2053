@@ -1,0 +1,24 @@
+L'endroit : `NKImage/Core/NkImage.h:88` et `:108` 
+contiennent deux `switch` qui parcourent les mêmes 
+formats de pixels pour obtenir respectivement le nom
+bre de canaux et le nombre d’octets. La même énuméra
+tion est également traitée dans `NKImage/Core/NkTextu
+reOven.h:107` et `:128` pour déterminer le format 
+GPU et les conversions nécessaires.
+
+Le motif : Une table centralisée de propriétés des 
+formats de pixels permettrait de regrouper les infor
+mations communes, comme le nombre de canaux et le nom
+bre d’octets, au lieu de répéter les correspondances 
+dans plusieurs `switch`. Les règles propres au GPU 
+resteraient dans `NkTextureOven`.
+
+Le coût : Deux fichiers principaux à modifier : 
+`NkImage.h` pour centraliser les propriétés communes 
+et `NkTextureOven.h` pour utiliser ces propriétés. 
+Aucun changement obligatoire dans les programmes uti
+lisateurs si les fonctions publiques sont conservées. 
+Les principaux risques concernent les formats spéciaux, 
+notamment `NK_RGB24`, qui doit être converti avant 
+son utilisation par le GPU, et les formats flottants. 
+Des tests sur chaque format seraient nécessaires.
