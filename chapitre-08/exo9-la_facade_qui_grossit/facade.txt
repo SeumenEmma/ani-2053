@@ -1,0 +1,56 @@
+Publiques :
+
+25 méthodes publiques au total, en comptant le destruc
+teur et chaque surcharge séparément : ~NkRenderTarget(), 
+Clear(), Display(), SetView(), GetView(), GetDefault
+View(), ResetView(), IsViewCustom(), SetViewport(), 
+GetViewport(), SetResizePolicy(), GetResizePolicy(), 
+GetDesignSize(), GetSize(), Draw(const NkDrawable&), 
+Draw(const NkVertexArray&), Draw(const NkVertex, 
+uint32, NkPrimitiveType, const NkRenderStates&), Draw
+(const NkIDrawable2D&), MapPixelToCoords(), MapCoords
+ToPixel(), GetRenderer() non const, GetRenderer() 
+const, GetRenderer2D() non const, GetRenderer2D() 
+const et Capture().
+
+Utiles :
+
+5 méthodes utilisées directement ou indirectement par
+le programme : Clear(), Display(), Draw(const NkDraw
+able&), Draw(const NkVertex*, uint32, NkPrimitiveType,
+const NkRenderStates&) et GetRenderer(). Clear() et 
+Draw() sont appelées dans le programme, GetRenderer() 
+sert à créer la texture, le Draw bas niveau est uti
+lisé par le sprite et Display() intervient dans la 
+boucle de rendu de NkCanvasApp.
+
+Les autres :
+
+20 méthodes ne sont pas utilisées par le programme 
+du sprint : ~NkRenderTarget(), SetView(), GetView(), 
+GetDefaultView(), ResetView(), IsViewCustom(), Set
+Viewport(), GetViewport(), SetResizePolicy(), GetRes
+izePolicy(), GetDesignSize(), GetSize(), Draw(const 
+NkVertexArray&), Draw(const NkIDrawable2D&), MapPixel
+ToCoords(), MapCoordsToPixel(), GetRenderer() const,
+GetRenderer2D() non const, GetRenderer2D() const et 
+Capture(). Elles répondent à des besoins de gestion 
+de caméra, de viewport, de redimensionnement, de dimen
+sions, de compatibilité avec l'ancienne interface, 
+de mapping des coordonnées, d'accès avancé aux renderers 
+et de capture d'écran. Draw(const NkIDrawable&) est 
+provisoire : son commentaire précise qu'elle sera 
+retirée après la migration de NkSprite et NkText 
+vers NkDrawable.
+
+Le rapport :
+
+Sur les 25 méthodes publiques, 5 sont utiles au programme
+et 20 ne sont pas utilisées, soit 20 % de méthodes 
+utilisées contre 80 % non utilisées. La façade propose 
+donc beaucoup plus de fonctionnalités que ce dont le 
+programme a besoin. Elle reste pratique pour simpli
+fier l'accès au rendu, mais elle commence à devenir 
+trop large. Sa promesse de simplicité est fragilisée 
+par le nombre de méthodes et les fonctionnalités 
+avancées qu'elle expose.
