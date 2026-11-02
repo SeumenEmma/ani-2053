@@ -1,0 +1,42 @@
+Les crochets :
+
+En parcourant le fichier `NKCanvas/App/NkCanvasApp.h`, j'ai identifié douze méthodes virtuelles qui permettent à une application dérivée de person
+naliser son fonctionnement. Voici leur emplacement et leur utilité :
+
+1. `OnCommandLine()` — ligne 249 : intervient avant la création de la fenêtre. Elle permet de traiter les arguments du programme et peut interrom
+pre son lancement en retournant un code de sortie.
+2. `OnInit()` — ligne 255 : est appelée lorsque la fenêtre et la cible de rendu sont disponibles. Elle permet de préparer l'application. Retourner
+ `false` entraîne l'abandon de l'initialisation.
+3. `OnUpdate()` — ligne 259 : sert à actualiser le fonctionnement de l'application pendant la boucle principale.
+4. `OnRender()` — ligne 262 : permet de réaliser les opérations de dessin de l'application.
+5. `OnShutdown()` — ligne 265 : intervient lors de l'arrêt et permet d'effectuer les dernières opérations nécessaires.
+6. `OnEvent()` — ligne 270 : reçoit les événements bruts. Retourner `true` indique que l'événement a été pris en charge, tandis que `false` laisse 
+la coquille poursuivre son traitement.
+7. `OnPointer()` — ligne 277 : regroupe les interactions provenant de la souris et des gestes tactiles.
+8. `OnKeyPress()` — ligne 282 : reçoit les événements correspondant à l'appui sur une touche.
+9. `OnLayout()` — ligne 291 : informe l'application des changements de dimensions, de zone de sécurité ou de densité. Elle est appelée au moins 
+une fois avant la première image.
+10. `OnCloseRequested()` — ligne 314 : permet à l'application d'accepter ou de refuser une demande de fermeture.
+11. `OnPause()` — ligne 321 : intervient lorsque l'application passe en arrière-plan ou perd le focus.
+12. `OnResume()` — ligne 323 : permet de réagir lorsque l'application reprend son activité.
+
+Le destructeur virtuel situé à la ligne 182 n'est pas inclus dans cette liste, car il ne s'agit pas d'un crochet de rappel de la boucle.
+
+L'ordre mesuré :
+
+Le programme `crochets.cpp` redéfinit les douze méthodes et enregistre chaque appel dans un fichier. Le compteur permet de conserver l'ordre des 
+appels, tandis que le numéro d'image et la valeur de `Time()` permettent de situer chaque intervention.
+
+Trois appels méritent une attention particulière :
+
+1. `OnCommandLine()` : cet appel intervient avant même la création de la fenêtre. On pourrait penser que l'application commence directement par 
+son initialisation graphique, mais le traitement des arguments a lieu auparavant.
+2. `OnLayout()` : cette méthode peut être appelée avant la première image. On pourrait supposer qu'elle intervient uniquement après un redimension
+nement, alors que l'en-tête précise qu'elle est appelée au moins une fois avant la première trame.
+3. `OnShutdown()` : cette méthode intervient pendant la phase d'arrêt. On pourrait croire que l'appel à `Quit()` termine immédiatement le program
+me, mais l'application doit encore effectuer son arrêt proprement.
+
+Debug et Release :
+
+Les deux configurations utilisent le même code et redéfinissent les mêmes douze crochets. La principale différence dans ce programme concerne le 
+nom du fichier de journal : `crochets-debug.log` en Debug et `crochets-release.log` en Release.
