@@ -1,0 +1,65 @@
+# Les crochets :
+
+Après avoir parcouru le fichier `NkCanvasApp.h`, j'ai identifié douze hooks virtuels redéfinissables dans la classe dérivée `MonJeu`. Voici leurs 
+noms et leurs positions dans le fichier :
+
+1. `OnCommandLine` — ligne 249 : intervient avant la création de la fenêtre.
+2. `OnInit` — ligne 255 : initialise l'application.
+3. `OnUpdate` — ligne 259 : actualise les données à chaque image.
+4. `OnRender` — ligne 262 : réalise le rendu graphique.
+5. `OnShutdown` — ligne 265 : intervient pendant l'arrêt du programme.
+6. `OnEvent` — ligne 270 : reçoit les événements généraux.
+7. `OnPointer` — ligne 277 : traite les interactions avec le pointeur.
+8. `OnKeyPress` — ligne 282 : prend en charge les événements du clavier.
+9. `OnLayout` — ligne 291 : réagit aux changements de disposition de la fenêtre.
+10. `OnCloseRequested` — ligne 314 : traite les demandes de fermeture.
+11. `OnPause` — ligne 321 : intervient lorsque l'application est mise en pause.
+12. `OnResume` — ligne 323 : intervient lorsque l'application reprend son activité.
+
+J'ai également relevé trois autres méthodes dans cette classe :
+
+13. `GarderEcranAllume` — ligne 341.
+14. `EpinglerEcran` — ligne 353.
+15. `RaisonDeLaPause` — ligne 365.
+
+Ces trois dernières méthodes ne sont pas des hooks virtuels. Elles servent plutôt à contrôler ou à consulter certains aspects du fonctionnement 
+de l'application.
+
+Au total, quinze méthodes ont donc été relevées, mais seules les douze premières constituent les hooks virtuels demandés dans cet exercice. 
+Ces hooks permettent à la classe dérivée de personnaliser différentes étapes du cycle de vie de `NkCanvasApp`.
+
+# L'ordre mesuré :
+
+Lors de notre essai en mode Debug, le fichier `crochets-debug.log` a conservé une trace de 26 appels.
+
+L'exécution débute par `OnCommandLine`. On trouve ensuite `OnLayout`, puis `OnInit`. Avant le démarrage du traitement des images, le programme 
+reçoit onze appels à `OnEvent`, suivis d'un appel à `OnPointer`.
+
+La boucle principale prend alors le relais. Pour chacune des cinq images traitées, `OnUpdate` est exécuté avant `OnRender`. Une fois le rendu de 
+la dernière image terminé, `OnShutdown` intervient pour terminer le cycle de vie de l'application.
+
+Les informations enregistrées dans le fichier permettent ainsi de reconstituer concrètement le déroulement du programme, au lieu de se limiter à 
+l'ordre théorique décrit dans la classe de base.
+
+# Les surprises :
+
+Première observation : `OnLayout` apparaît dans le journal avant `OnInit`. Je pensais initialement que l'initialisation serait la première 
+opération liée à la fenêtre. Le test montre que l'ordre réel peut être différent de cette attente.
+
+Deuxième observation : plusieurs appels à `OnEvent` sont enregistrés avant les premières mises à jour. Cela montre que le programme peut trai
+ter des événements avant même que la boucle de rendu commence à produire ses images.
+
+Troisième observation : l'appel à `Quit()` ne provoque pas une interruption immédiate au milieu de la cinquième image. Après sa demande dans 
+`OnUpdate`, `OnRender` s'exécute encore pour terminer cette image, puis `OnShutdown` est appelé. Ce comportement correspond au fonctionnement annoncé dans `NkCanvasApp.h` : la trame en cours doit pouvoir se terminer correctement.
+
+Par ailleurs, certains hooks comme `OnKeyPress`, `OnCloseRequested`, `OnPause` et `OnResume` ne figurent pas dans ce journal. Leur absence ne signi
+fie pas qu'ils ne fonctionnent pas : les conditions nécessaires à leur déclenchement ne se sont simplement pas présentées pendant cette exécution.
+
+# Debug et Release :
+
+En configuration Debug, le programme a terminé son exécution normalement et le journal contient 26 appels. Les traces obtenues permettent de suivre 
+les étapes de démarrage, le traitement des événements, les cinq cycles de mise à jour et de rendu, puis la fermeture.
+
+La configuration Release reste à tester. Il n'est donc pas encore possible de conclure que son comportement est identique à celui de Debug. Pour 
+effectuer une comparaison fiable, il faudra compiler et exécuter le programme dans les deux configurations, puis examiner les journaux obtenus : 
+ordre des méthodes, nombre d'appels et éventuelles différences de comportement.
