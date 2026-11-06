@@ -1,0 +1,16 @@
+Réponse :
+
+Il est important de ne pas ajouter d'avertissements inutiles
+dans un programme.
+
+L'ajout de la variable locale variableInutilisee a provoqué
+un avertissement de compilation avec les options -Wall -Wextra.
+
+Pour corriger ce problème, j'ai supprimé la variable inutilisée.
+Après cette suppression, la compilation ne produit plus
+d'avertissement.
+
+Conclusion :
+Il faut éviter de déclarer des variables qui ne sont pas utilisées
+et vérifier les avertissements lors de la compilation afin de
+garder un code propre et facile à maintenir.
