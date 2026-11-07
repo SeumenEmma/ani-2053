@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -7,6 +8,7 @@ struct Methode {
     string nom;
     string declaration;
     int modifie;
+    vector<string> nomsAppeles;
     vector<int> appels;
 };
 
@@ -16,8 +18,10 @@ int main() {
 
     vector<Methode> methodes(n);
 
+    // Lire toutes les méthodes.
     for (int i = 0; i < n; i++) {
         int k;
+
         cin >> methodes[i].nom;
         cin >> methodes[i].declaration;
         cin >> methodes[i].modifie;
@@ -26,9 +30,15 @@ int main() {
         for (int j = 0; j < k; j++) {
             string nomAppel;
             cin >> nomAppel;
+            methodes[i].nomsAppeles.push_back(nomAppel);
+        }
+    }
 
+    // Retrouver les indices des méthodes appelées.
+    for (int i = 0; i < n; i++) {
+        for (size_t j = 0; j < methodes[i].nomsAppeles.size(); j++) {
             for (int x = 0; x < n; x++) {
-                if (methodes[x].nom == nomAppel) {
+                if (methodes[x].nom == methodes[i].nomsAppeles[j]) {
                     methodes[i].appels.push_back(x);
                 }
             }
@@ -53,7 +63,7 @@ int main() {
             if (pourrait[i] && methodes[i].declaration == "-") {
                 bool correct = true;
 
-                for (int j = 0; j < methodes[i].appels.size(); j++) {
+                for (size_t j = 0; j < methodes[i].appels.size(); j++) {
                     int appel = methodes[i].appels[j];
 
                     if (methodes[appel].declaration != "const" && !pourrait[appel]) {
@@ -69,6 +79,7 @@ int main() {
         }
     }
 
+    // Afficher les méthodes qui pourraient devenir const.
     cout << "POURRAIT";
     bool vide = true;
 
@@ -79,7 +90,10 @@ int main() {
         }
     }
 
-    if (vide) cout << " AUCUN";
+    if (vide) {
+        cout << " AUCUN";
+    }
+
     cout << '\n';
 
     // Afficher les racines.
@@ -90,7 +104,7 @@ int main() {
         if (pourrait[i] && methodes[i].declaration == "-") {
             bool racine = true;
 
-            for (int j = 0; j < methodes[i].appels.size(); j++) {
+            for (size_t j = 0; j < methodes[i].appels.size(); j++) {
                 int appel = methodes[i].appels[j];
 
                 if (methodes[appel].declaration != "const") {
@@ -105,7 +119,10 @@ int main() {
         }
     }
 
-    if (vide) cout << " AUCUN";
+    if (vide) {
+        cout << " AUCUN";
+    }
+
     cout << '\n';
 
     // Calculer le nombre de passes.
@@ -133,7 +150,7 @@ int main() {
             if (pourrait[i] && !dejaConst[i]) {
                 bool possible = true;
 
-                for (int j = 0; j < methodes[i].appels.size(); j++) {
+                for (size_t j = 0; j < methodes[i].appels.size(); j++) {
                     int appel = methodes[i].appels[j];
 
                     if (!dejaConst[appel]) {
@@ -147,9 +164,11 @@ int main() {
             }
         }
 
-        if (pretes.empty()) break;
+        if (pretes.empty()) {
+            break;
+        }
 
-        for (int i = 0; i < pretes.size(); i++) {
+        for (size_t i = 0; i < pretes.size(); i++) {
             dejaConst[pretes[i]] = true;
             restantes--;
         }
