@@ -1,0 +1,16 @@
+La promesse la plus forte : La méthode HalfSize est 
+static. Elle ne dépend donc d'aucune instance de 
+NkRefBoard et ne peut pas modifier directement les 
+attributs d'un objet. Son paramètre const NkRefItem& 
+empêche également de modifier l'élément reçu.
+
+Le message du compilateur : error: passing 'const 
+nkref::NkRefView' as 'this' argument discards quali
+fiers [-fpermissive]. Cette erreur apparaît parce que 
+PanByPixels modifie les coordonnées de center, mais 
+qu'elle est appelée sur une vue déclarée const.
+
+Une promesse que la signature ne dit pas : PixelToWorld 
+divise les coordonnées par zoom. Sa signature ne garan
+tit pas que zoom soit différent de zéro. Si zoom vaut
+zéro, le calcul peut produire un résultat incorrect.

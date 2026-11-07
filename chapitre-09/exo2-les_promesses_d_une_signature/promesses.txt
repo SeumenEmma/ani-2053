@@ -1,0 +1,5 @@
+method : PixelToWorld, promises : 3
+method : GridSpacing, promises : 1
+method : HalfSize, promises : 2
+method : HitTest, promises : 2
+method : AddItem, promises : 1
