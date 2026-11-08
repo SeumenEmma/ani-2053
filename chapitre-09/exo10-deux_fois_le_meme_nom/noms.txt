@@ -1,0 +1,2 @@
+nom : NkMode, fichier : Applications/NkDames/src/Dames/NkDamesEcran.h, ligne : 96
+nom : NkMode, fichier : Applications/NkRef/src/NkRef/main.cpp, ligne : 337

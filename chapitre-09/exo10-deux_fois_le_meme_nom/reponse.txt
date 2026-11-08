@@ -1,0 +1,12 @@
+Le premier mérite-t-il le nom :
+Oui. Dans NkDames, NkMode désigne les différentes configurations possibles d'une partie : jouer contre l'ordinateur, jouer à deux ou faire jouer deux intelligences artificielles. 
+Le nom est donc cohérent avec son utilisation.
+
+Le second mérite-t-il le nom :
+Oui également. Dans NkRef, NkMode représente l'état d'interaction actuel de l'utilisateur avec le canevas. Il indique si celui-ci est au repos, en train de déplacer un élément, de des
+siner, de redimensionner ou de sélectionner une zone. Cependant, il ne représente pas la même notion que le mode de jeu de NkDames.
+
+Le renommage le moins cher :
+Je choisirais de renommer le NkMode de NkDames en NkModePartie. Ce changement concerne 3 fichiers et 9 lignes, contre 1 fichier et 18 lignes pour NkRef. Même si le changement dans 
+NkDames touche davantage de fichiers, il demande moins de lignes à modifier. Le nouveau nom NkModePartie permet aussi de mieux distinguer la configuration d'une partie du mode d'inte
+raction de NkRef.
