@@ -1,16 +1,23 @@
-La promesse la plus forte : La méthode HalfSize est 
-static. Elle ne dépend donc d'aucune instance de 
-NkRefBoard et ne peut pas modifier directement les 
-attributs d'un objet. Son paramètre const NkRefItem& 
-empêche également de modifier l'élément reçu.
+La promesse la plus forte : La méthode HalfSize est static. Elle 
+ne dépend donc d'aucune instance de NkRefBoard. Son paramètre 
+const NkRefItem& empêche également de modifier l'élément reçu. 
+Dans le corps, lignes 78 à 80 de NkRefBoard.h, on constate que 
+la méthode lit uniquement texW, texH et scale pour calculer la 
+demi-taille.
 
-Le message du compilateur : error: passing 'const 
-nkref::NkRefView' as 'this' argument discards quali
-fiers [-fpermissive]. Cette erreur apparaît parce que 
-PanByPixels modifie les coordonnées de center, mais 
-qu'elle est appelée sur une vue déclarée const.
+Le message du compilateur : error: passing 'const nkref::NkRefView' as 'this' argument discards qualifiers [-fpermissive]
+    9 |     vue.PanByPixels(1.0f, 0.0f);
+      |     ~~~~~~~~~~~~~~~^~~~~~~~~~~~
+D:/Nkentseu/Applications/NkRef/src/NkRef/NkRefView.h:45:30: note: in call to 'void nkref::NkRefView::PanByPixels(nkentseu::float32, nkentseu::float32)'
+   45 |                         void PanByPixels(float32 dxPixels, float32 dyPixels) {
+      |                              ^~~~~~~~~~~
+Cette erreur apparaît parce que PanByPixels modifie les coordon
+nées de center, comme on le voit dans son corps, lignes 45 à 
+48 de NkRefView.h. La méthode n'est pas déclarée const et ne 
+peut donc pas être appelée sur une instance const.
 
-Une promesse que la signature ne dit pas : PixelToWorld 
-divise les coordonnées par zoom. Sa signature ne garan
-tit pas que zoom soit différent de zéro. Si zoom vaut
-zéro, le calcul peut produire un résultat incorrect.
+Une promesse que la signature ne dit pas : PixelToWorld divise 
+les coordonnées par zoom. Dans son corps, lignes 33 à 36 de 
+NkRefView.h, on constate que zoom est utilisé comme diviseur. 
+Sa signature ne garantit pas que zoom soit différent de zéro. 
+Si zoom vaut zéro, le calcul peut produire un résultat incorrect.
