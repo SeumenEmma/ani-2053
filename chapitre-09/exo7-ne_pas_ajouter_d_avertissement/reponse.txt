@@ -1,16 +1,25 @@
-Réponse :
+Comment j'ai compté :
+J'ai effectué une compilation complète du projet avant et après 
+mon test. J'ai ensuite utilisé la commande Select-String dans 
+PowerShell pour compter les lignes contenant « warning: » dans 
+les journaux de compilation. J'ai obtenu 268 avertissements avant 
+et 268 après. Le nombre total n'a donc pas augmenté.
 
-Il est important de ne pas ajouter d'avertissements inutiles
-dans un programme.
+Où était le mien :
+Mon avertissement était situé dans le fichier NkPlatform.cpp, 
+dans le dossier Kernel/Foundation/NKCore/src/NKCore, à la ligne 
+673 et à la colonne 13. Il était provoqué par une variable ap
+pelée variableInutilisee, déclarée mais jamais utilisée. Pour 
+vérifier sa présence, j'ai activé temporairement l'option -Wun
+used-variable dans la configuration de NKCore. Le compilateur 
+Clang a alors signalé précisément cette variable. Après le test, 
+j'ai supprimé la variable et restauré la configuration initiale.
 
-L'ajout de la variable locale variableInutilisee a provoqué
-un avertissement de compilation avec les options -Wall -Wextra.
-
-Pour corriger ce problème, j'ai supprimé la variable inutilisée.
-Après cette suppression, la compilation ne produit plus
-d'avertissement.
-
-Conclusion :
-Il faut éviter de déclarer des variables qui ne sont pas utilisées
-et vérifier les avertissements lors de la compilation afin de
-garder un code propre et facile à maintenir.
+Ce que coûte la vérification :
+La compilation complète a duré environ 12 min 44 s avant le 
+test et 12 min 23 s après. La compilation ciblée de NKCore, 
+avec l'option -Wunused-variable, a duré 2,97 secondes. Cependant, 
+la compilation complète n'a pas réussi pour tous les projets : 
+249 projets sur 257 ont été construits et 8 ont échoué à l'éta
+pe de liaison, notamment à cause de la bibliothèque Vulkan man
+quante.

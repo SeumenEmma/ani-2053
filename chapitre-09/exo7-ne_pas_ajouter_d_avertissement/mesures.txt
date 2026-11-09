@@ -1,16 +1,5 @@
-Mesures réalisées avec le projet 01_hello_console.
-
-Compilation initiale :
-- Configuration : Debug
-- Plateforme : Windows
-- Compilation propre avec jenga clean puis jenga build.
-- Nombre d'avertissements : 0
-
-Après l'ajout d'une variable locale inutilisée :
-- Variable ajoutée : int variableInutilisee = 42;
-- Compilation avec Clang et les options -Wall -Wextra.
-- Nombre d'avertissements : 1
-
-Après suppression de la variable inutilisée :
-- Compilation avec Clang et les options -Wall -Wextra.
-- Nombre d'avertissements : 0
+avant : 268 avertissements
+apres : 268 avertissements
+duree avant : 12 min 44 s
+duree apres : 12 min 23 s
+duree verification ciblee : 2,97 s

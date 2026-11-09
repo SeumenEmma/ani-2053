@@ -1,12 +1,4 @@
-Avertissement observé :
-
-main.cpp:10:9: warning: unused variable 'variableInutilisee'
-      [-Wunused-variable]
-   10 |     int variableInutilisee = 42;
-      |         ^~~~~~~~~~~~~~~~~~
-
-1 warning generated.
-
-Explication :
-L'avertissement -Wunused-variable indique que la variable
-variableInutilisee a été déclarée, mais qu'elle n'est jamais utilisée.
+Fichier : D:\Nkentseu\Kernel\Foundation\NKCore\src\NKCore\NkPlatform.cpp
+Ligne : 673
+Colonne : 13
+D:\Nkentseu\Kernel\Foundation\NKCore\src\NKCore\NkPlatform.cpp:673:13: warning: unused variable 'variableInutilisee' [-Wunused-variable]
