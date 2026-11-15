@@ -1,0 +1,7 @@
+Le signe que j'ai changé : J'ai remplacé le signe moins (-) par le signe plus (+) dans le calcul de center.x dans la méthode ZoomAtPixel 
+du fichier NkRefView.h copié.
+
+Le test qui est tombé : Le test point_fixe a échoué, car le point du monde situé sous le curseur ne reste plus fixe après le zoom.
+
+Un test qui n'a rien vu : Le test grille est resté OK, car il vérifie uniquement l'espacement de la grille en fonction du zoom et ne vérifie 
+pas le centre de la caméra.
