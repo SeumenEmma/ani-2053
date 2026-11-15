@@ -1,0 +1,5 @@
+main.cpp : 2138 lignes, inclut : NkRefView.h, NkRefBoard.h, NkRefFile.h
+NkRefView.h : 86 lignes, inclut : aucun fichier NkRef interne
+NkRefBoard.h : 371 lignes, inclut : aucun fichier NkRef interne
+NkRefFile.h : 224 lignes, inclut : NkRefBoard.h, NkRefView.h
+commit : f77094fcf

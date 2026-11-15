@@ -1,0 +1,12 @@
+Ce que possède chaque fichier :
+main.cpp possède l'interface graphique, la fenêtre, les événements et le rendu. NkRefView.h possède les informations et transformations 
+liées à la vue. NkRefBoard.h possède le modèle de la planche, les éléments, les traits et les opérations de sélection et de déplacement. 
+NkRefFile.h possède la lecture et l'écriture des fichiers, notamment la sauvegarde et le chargement des données.
+
+La part des fichiers purs :
+NkRefView.h, NkRefBoard.h et NkRefFile.h sont purs car ils ne dépendent ni d'une fenêtre ni d'un système de rendu. Cela représente 3 fichiers 
+sur 4, soit 75 %. En nombre de lignes, ils représentent 681 lignes sur 2819, soit 24,16 %.
+
+Les deux fichiers que je garderais :
+Je garderais NkRefBoard.h et NkRefView.h, car ils contiennent les éléments essentiels de la logique métier et de la gestion de la vue, 
+sans dépendre de la fenêtre ni du rendu.
