@@ -1,0 +1,82 @@
+COMMIT ÉTUDIÉ
+
+`f77094fcf92ee4a5ec79d8c5ae3a229531c0ffca`
+
+LES MIROIRS
+
+Commande que j ai utilise :
+
+git grep -n "GetFlipX" -- Kernel
+
+Résultat :
+
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Batch/NkBatchRenderer2D.cpp:623:                        if (sprite.GetFlipX()) {
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.cpp:51:              bool NkSprite::GetFlipX() const {
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.h:82:                                bool GetFlipX() const;
+
+
+MEMBRE : mOutlineColor
+
+j ai utilise la commande :
+
+git grep -n -w "mOutlineColor" -- Kernel
+
+Résultat :
+
+Documentation/notes_nkcanvas_nkgui.md:238: ...
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.h:150: mOutlineColor= c;
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.h:162: return mOutlineColor;
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.h:202: NkColor2D mOutlineColor = NkColor2D::Black;
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Shapes/NkShape.cpp:170: v[k++] = MakeVertex(a0, mOutlineColor);
+
+
+pour pouvoir vérifier des getters j ai utiliser la commande :
+
+git grep -n -w -E "GetFillColor|GetOutlineColor|GetOutlineThickness" -- Kernel
+
+
+Résultat :
+
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.h:157: NkColor2D GetFillColor() const {
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.h:161: NkColor2D GetOutlineColor() const {
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.h:165: float32 GetOutlineThickness() const {
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Shapes/NkShape.h:50: NkColor2D GetFillColor() const noexcept {
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Shapes/NkShape.h:58: NkColor2D GetOutlineColor() const noexcept {
+
+MEMBRE 2 : mOutlineThickness
+
+Commande :
+
+git grep -n -w "mOutlineThickness" -- Kernel
+
+
+Résultat :
+
+Kernel/Runtime/NKCanvas/ROADMAP.md:212: - **Outline épais** (mOutlineThickness > 1) : expansion en quads avec
+Kernel/Runtime/NKCanvas/USAGE.md:487: 4. **mOutlineThickness > 1** sur NkShape : actuellement, l'outline est rendu via NK_LINE_STRIP qui appelle DrawLine(thickness=1). Les outlines épais demandent une expansion en quads (TODO).
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.h:154: mOutlineThickness = t;
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.h:166: return mOutlineThickness;
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.h:203: float32 mOutlineThickness = 0.f;
+
+
+pour pouvoir vérifier des appels du getter :
+
+git grep -n -w "GetOutlineThickness" -- Kernel
+
+Résultat :
+
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.h:165: float32 GetOutlineThickness() const {
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Shapes/NkShape.h:66: float32 GetOutlineThickness()const noexcept {
+
+MEMBRE 3 : sourcePath
+
+Commande :
+
+git grep -n -w "sourcePath" -- Applications/NkRef
+
+
+Résultat :
+
+Applications/NkRef/src/NkRef/NkRefBoard.h:44:        NkString sourcePath; ///< vide = collée du presse-papiers (Étape 2 : octets embarqués)
+Applications/NkRef/src/NkRef/NkRefBoard.h:65:        uint32 AddItem(const NkVec2f &worldPos, uint32 texW, uint32 texH, const NkString &sourcePath) {
+Applications/NkRef/src/NkRef/NkRefBoard.h:71:                it.sourcePath = sourcePath;

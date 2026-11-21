@@ -1,0 +1,24 @@
+MEMBRE 1 : mOutlineColor
+
+Fichier et ligne d'écriture : NkSprite.h, ligne 150 (SetOutlineColor).
+Lecteur : Aucun appel externe à GetOutlineColor() trouvé dans Kernel.
+Verdict : Valeur stockée et exposée par un getter, mais aucun consommateur identifié dans le moteur.
+Preuve : Le getter retourne mOutlineColor à la ligne 162, mais aucune utilisation de ce getter n'a été trouvée dans le code du moteur.
+
+MEMBRE 2 : mOutlineThickness
+
+Fichier et ligne d'écriture : NkSprite.h, ligne 154 (SetOutlineThickness).
+Lecteur : Aucun appel externe à GetOutlineThickness() trouvé dans Kernel pour NkText.
+Verdict : Valeur stockée et exposée par un getter, mais aucun consommateur identifié dans le moteur.
+Preuve : Le getter retourne mOutlineThickness à la ligne 166, mais aucune utilisation de ce getter n'a été trouvée dans le code du moteur. Le getter de NkShape appartient à une autre classe.
+
+MEMBRE 3 : sourcePath
+
+Fichier et ligne d'écriture : NkRefBoard.h, ligne 71 (it.sourcePath = sourcePath).
+Lecteur : Aucun lecteur trouvé dans Applications/NkRef.
+Verdict : Membre écrit, mais aucune lecture identifiée dans le code examiné.
+Preuve : La commande `git grep -n -w "sourcePath" -- Applications/NkRef` ne retourne que la déclaration, le paramètre de AddItem et l'affectation du membre.
+
+CE QUE LA LECTURE SEULE N'AURAIT PAS MONTRÉ
+
+La simple lecture des déclarations et des commentaires ne permet pas de savoir si un membre est réellement utilisé. Il faut suivre les écritures et rechercher les lectures dans l'ensemble du code. Cette vérification permet de distinguer un membre simplement déclaré ou affecté d'un membre effectivement consommé par le moteur. Elle permet aussi de ne pas confondre deux membres portant le même nom dans des classes différentes.
