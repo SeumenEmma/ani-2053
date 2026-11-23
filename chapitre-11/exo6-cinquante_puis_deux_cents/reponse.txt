@@ -1,0 +1,27 @@
+Le protocole : Les mesures ont été réalisées sur un ordinateur HP Laptop 15-fd0xxx équipé d'un processeur Intel Core i7-1355U (10 cœurs et
+12 processeurs logiques), avec 16 Go de RAM, sous Windows 11 Famille 64 bits (version 10.0.26200). Le compilateur utilisé est G++ 15.2.0, 
+cible x86_64-w64-mingw32, avec Jenga 2.8.2 et les bibliothèques du moteur en configuration Debug-Windows. Le commit du moteur est f77094fc
+f92ee4a5ec79d8c5ae3a229531c0ffca. Le programme a été compilé depuis D:\NkRefBenchProbe avec la commande : g++ -std=c++17 -O0 -g -Wall 
+-Wextra -Werror -I"D:\Nkentseu\Applications\NkRef\src" -isystem "D:\Nkentseu\Build\Kit\NkentseuKit\include" "D:\ani-2053\chapitre-11\exo6-
+cinquante_puis_deux_cents\mesure.cpp" suivi des bibliothèques NKTime.lib, NKLogger.lib, NKThreading.lib, NKMath.lib, NKContainers.lib, 
+NKMemory.lib, NKCore.lib et NKPlatform.lib du dossier Debug-Windows, ainsi que des bibliothèques système Windows, puis -o mesure.exe. Les 
+commandes d'exécution ont été .\mesure.exe 50, trois fois, puis .\mesure.exe 200, trois fois. Chaque durée affichée est la moyenne de 20 
+appels. Les trois modifications locales présentes dans le dépôt du moteur étaient .vscode/settings.json, config/graphics.jenga et pyrightconfig.
+json.
+
+L'écart entre mes trois mesures : Pour 50 images, l'écart entre la valeur maximale et la valeur minimale est de 0,272 ms en écriture 
+(0,470 - 0,198) et de 0,058 ms en relecture (0,275 - 0,217). Pour 200 images, cet écart est de 0,041 ms en écriture (0,765 - 0,724) et de 
+0,048 ms en relecture (0,680 - 0,632). Les mesures à 50 images présentent donc une variation plus importante en écriture. Ces écarts montrent 
+que plusieurs lancements sont nécessaires pour apprécier la stabilité des résultats.
+
+Ce que coûtent quatre fois plus d'images : Le passage de 50 à 200 images multiplie exactement par quatre le nombre d'images et le volume 
+sérialisé, qui passe de 51 832 à 207 232 octets. Le temps moyen d'écriture passe d'environ 0,334 ms à 0,738 ms, soit une multiplication 
+par environ 2,21. Le temps moyen de relecture passe d'environ 0,243 ms à 0,660 ms, soit une multiplication par environ 2,71. Les temps 
+augmentent donc moins vite que le nombre d'images dans ces mesures. L'augmentation moyenne est d'environ 0,403 ms en écriture et 0,417 ms 
+en relecture.
+
+Ce qui deviendrait limitant en premier : Ce qui est mesuré ici est uniquement le coût de la sérialisation et de la désérialisation en mémoire, 
+avec des images de 100 par 80 pixels et 1 000 octets source identiques par image. Aucun affichage, chargement réel de fichier, décodage 
+d'image ou transfert de texture vers le GPU n'a été mesuré. On peut supposer que, dans une utilisation réelle avec beaucoup d'images, les 
+allocations mémoire, les copies de données, le chargement des fichiers ou l'envoi des textures au GPU pourraient devenir limitants. Ce 
+sont toutefois des hypothèses à vérifier par d'autres mesures, et non des conclusions démontrées par cet exercice.
