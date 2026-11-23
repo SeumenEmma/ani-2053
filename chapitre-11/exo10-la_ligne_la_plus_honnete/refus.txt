@@ -1,0 +1,9 @@
+La ligne refusée : Synchronisation_Cloud
+
+Ma défense : Je comprends que vous souhaitiez retrouver vos planches sur plusieurs appareils. Pour l'instant, cette fonction demanderait 
+beaucoup de travail alors qu'elle répond à un besoin moins urgent que l'amélioration de la recherche ou de l'exportation. Je préfère donc 
+ne pas la promettre maintenant et éviter de retarder des améliorations utiles à tous.
+
+Ce que je propose à la place : Je propose d'abord de permettre l'enregistrement des planches dans un dossier local facile à retrouver, puis
+de laisser chacun synchroniser ce dossier avec le service de son choix. Cela répond au besoin de conserver et de transférer ses planches 
+sans obliger l'outil à gérer lui-même des comptes et des serveurs.

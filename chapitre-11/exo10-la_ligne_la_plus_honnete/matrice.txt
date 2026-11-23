@@ -1,0 +1,11 @@
+10
+Annulation_Retablissement 5 3 SUPPOSEE MANQUE
+Import_WebP_AVIF 4 4 SUPPOSEE MANQUE
+Recherche_Filtrage 4 2 SUPPOSEE MANQUE
+Export_Planche_PNG 4 2 SUPPOSEE MANQUE
+Comparaison_Images 3 3 SUPPOSEE MANQUE
+Synchronisation_Cloud 1 5 SUPPOSEE MANQUE
+Modele_Projets 3 4 SUPPOSEE MANQUE
+Bibliotheque_Decodage 2 3 SUPPOSEE SOCLE Import_WebP_AVIF
+Refonte_Complete_Interface 5 5 SUPPOSEE REECRITURE
+Choix_Theme_Interface 3 2 - CHOIX

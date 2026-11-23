@@ -1,0 +1,11 @@
+CASE DECOUPER Annulation_Retablissement SUPPOSEE
+CASE DECOUPER Import_WebP_AVIF SUPPOSEE
+CASE MAINTENANT Recherche_Filtrage SUPPOSEE
+CASE MAINTENANT Export_Planche_PNG SUPPOSEE
+CASE DECOUPER Comparaison_Images SUPPOSEE
+CASE ON_NE_LE_FAIT_PAS Synchronisation_Cloud SUPPOSEE
+CASE DECOUPER Modele_Projets SUPPOSEE
+CASE DECOUPER Bibliotheque_Decodage SUPPOSEE
+HORS_LISTE Refonte_Complete_Interface reecriture
+HORS_LISTE Choix_Theme_Interface choix
+VERDICT HONNETE
