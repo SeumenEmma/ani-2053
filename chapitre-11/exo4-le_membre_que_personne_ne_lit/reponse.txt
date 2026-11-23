@@ -1,24 +1,24 @@
-MEMBRE 1 : mOutlineColor
+Membre : NkText::mOutlineColor
+Écrit dans : Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.h:150
+Lu par : personne (aucun appel externe à GetOutlineColor() trouvé)
+Verdict : défaut
 
-Fichier et ligne d'écriture : NkSprite.h, ligne 150 (SetOutlineColor).
-Lecteur : Aucun appel externe à GetOutlineColor() trouvé dans Kernel.
-Verdict : Valeur stockée et exposée par un getter, mais aucun consommateur identifié dans le moteur.
-Preuve : Le getter retourne mOutlineColor à la ligne 162, mais aucune utilisation de ce getter n'a été trouvée dans le code du moteur.
+Preuve : Le setter SetOutlineColor permet de modifier la couleur du contour du texte, mais NkText::Draw ne consomme pas cette valeur pour dessiner les caractères. L'utilisateur peut donc demander une couleur de contour sans obtenir le résultat attendu.
 
-MEMBRE 2 : mOutlineThickness
+Membre : NkText::mOutlineThickness
+Écrit dans : Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.h:154
+Lu par : personne (aucun appel externe à GetOutlineThickness() trouvé)
+Verdict : défaut
 
-Fichier et ligne d'écriture : NkSprite.h, ligne 154 (SetOutlineThickness).
-Lecteur : Aucun appel externe à GetOutlineThickness() trouvé dans Kernel pour NkText.
-Verdict : Valeur stockée et exposée par un getter, mais aucun consommateur identifié dans le moteur.
-Preuve : Le getter retourne mOutlineThickness à la ligne 166, mais aucune utilisation de ce getter n'a été trouvée dans le code du moteur. Le getter de NkShape appartient à une autre classe.
+Preuve : Le setter SetOutlineThickness permet de modifier l'épaisseur du contour du texte, mais cette valeur n'est pas utilisée dans le dessin de NkText. L'utilisateur ne peut donc pas obtenir le contour épais qu'il demande avec cette propriété.
 
-MEMBRE 3 : sourcePath
+Membre : NkRefItem::sourcePath
+Écrit dans : Applications/NkRef/src/NkRef/NkRefBoard.h:71
+Lu par : personne (aucune lecture trouvée dans Applications/NkRef)
+Verdict : inutile
 
-Fichier et ligne d'écriture : NkRefBoard.h, ligne 71 (it.sourcePath = sourcePath).
-Lecteur : Aucun lecteur trouvé dans Applications/NkRef.
-Verdict : Membre écrit, mais aucune lecture identifiée dans le code examiné.
-Preuve : La commande `git grep -n -w "sourcePath" -- Applications/NkRef` ne retourne que la déclaration, le paramètre de AddItem et l'affectation du membre.
+Preuve : Le chemin de l'image est affecté à sourcePath, mais aucune lecture de ce membre n'a été trouvée. La sauvegarde et la réouverture utilisent directement les octets de l'image, conservés dans le fichier .nkref, ce qui rend ce chemin inutile dans le fonctionnement actuel.
 
-CE QUE LA LECTURE SEULE N'AURAIT PAS MONTRÉ
+Ce que la lecture seule n'aurait pas montré :
 
-La simple lecture des déclarations et des commentaires ne permet pas de savoir si un membre est réellement utilisé. Il faut suivre les écritures et rechercher les lectures dans l'ensemble du code. Cette vérification permet de distinguer un membre simplement déclaré ou affecté d'un membre effectivement consommé par le moteur. Elle permet aussi de ne pas confondre deux membres portant le même nom dans des classes différentes.
+La recherche des noms montre où les membres sont déclarés, modifiés et éventuellement lus, mais elle ne permet pas à elle seule de savoir si les fonctionnalités promises fonctionnent réellement. En examinant NkText::Draw, on constate que les propriétés de contour ne sont pas utilisées pour dessiner le texte. En examinant la sérialisation et la désérialisation de NkRef, on découvre que les octets des images sont enregistrés et restaurés directement, sans avoir besoin de relire sourcePath. C'est donc l'étude du fonctionnement réel du code, et pas seulement la lecture des déclarations, qui permet de distinguer un défaut d'une donnée inutile.
